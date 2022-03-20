@@ -996,6 +996,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 69E25ADE31E6A3624EEA45DA /* Pods-Chromerivals.debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -1029,6 +1030,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0BC59B59F26DF4A5E49E6107 /* Pods-Chromerivals.release.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
