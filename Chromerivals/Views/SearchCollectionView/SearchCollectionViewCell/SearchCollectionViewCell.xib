@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="pediaCell" id="NbP-TA-sOB" customClass="SearchCollectionViewCell" customModule="Chromerivals" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="368" height="92"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KxB-sA-34r">
+                <rect key="frame" x="0.0" y="0.0" width="368" height="92"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chromelogoapp" translatesAutoresizingMaskIntoConstraints="NO" id="gy5-TK-aGO">
+                        <rect key="frame" x="0.0" y="16" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="ZUX-7F-eaN"/>
+                            <constraint firstAttribute="height" constant="60" id="xjK-LC-dPx"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="akar-icons_arrow-right" translatesAutoresizingMaskIntoConstraints="NO" id="668-tc-nrj">
+                        <rect key="frame" x="343" y="36" width="25" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="WFT-7f-vr8"/>
+                            <constraint firstAttribute="height" constant="20" id="x6E-gf-JY5"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kou-fy-z2P">
+                        <rect key="frame" x="81" y="36" width="41.5" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="kou-fy-z2P" firstAttribute="centerY" secondItem="668-tc-nrj" secondAttribute="centerY" id="DtR-H3-XHf"/>
+                    <constraint firstItem="gy5-TK-aGO" firstAttribute="leading" secondItem="KxB-sA-34r" secondAttribute="leading" id="G6M-q7-j7v"/>
+                    <constraint firstItem="kou-fy-z2P" firstAttribute="leading" secondItem="gy5-TK-aGO" secondAttribute="trailing" constant="21" id="Uf6-tr-X9X"/>
+                    <constraint firstItem="668-tc-nrj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kou-fy-z2P" secondAttribute="trailing" id="buN-xd-zVR"/>
+                    <constraint firstItem="gy5-TK-aGO" firstAttribute="centerY" secondItem="KxB-sA-34r" secondAttribute="centerY" id="drZ-6H-dqa"/>
+                    <constraint firstItem="668-tc-nrj" firstAttribute="centerY" secondItem="KxB-sA-34r" secondAttribute="centerY" id="ji4-3i-y2t"/>
+                    <constraint firstAttribute="trailing" secondItem="668-tc-nrj" secondAttribute="trailing" id="wbt-jf-pI1"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="368" height="92"/>
+            <connections>
+                <outlet property="pediaItemImage" destination="gy5-TK-aGO" id="z4a-jz-QsS"/>
+                <outlet property="pediaItemName" destination="kou-fy-z2P" id="wA2-wJ-Cim"/>
+            </connections>
+            <point key="canvasLocation" x="-65.217391304347828" y="-299.33035714285711"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="akar-icons_arrow-right" width="16" height="16"/>
+        <image name="chromelogoapp" width="512" height="512"/>
+    </resources>
+</document>

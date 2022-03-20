@@ -1,0 +1,12 @@
+//
+//  NetworkRsponse.swift
+//  Chromerivals
+//
+//  Created by Ismael Bolaños García on 17/3/22.
+//
+
+import Foundation
+
+protocol NetworkResponse {
+
+}

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeHeaderController" customModule="Chromerivals" customModuleProvider="target">
+            <connections>
+                <outlet property="companyName" destination="5PH-ym-pLe" id="efT-7v-hfR"/>
+                <outlet property="headerContent" destination="GSV-xs-F5w" id="SK8-Xz-uuh"/>
+                <outlet property="roundedHeaderView" destination="Ldy-Nw-mlB" id="opJ-Eu-Pat"/>
+                <outlet property="view" destination="0JY-Yo-gA3" id="BFI-ea-ne5"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="0JY-Yo-gA3">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ldy-Nw-mlB" userLabel="Top Rounded View">
+                    <rect key="frame" x="-2" y="124" width="417" height="40"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="aTs-94-Tov"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GSV-xs-F5w">
+                    <rect key="frame" x="0.0" y="44" width="414" height="80"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHROMERIVALS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5PH-ym-pLe">
+                            <rect key="frame" x="95" y="26" width="159" height="28.5"/>
+                            <fontDescription key="fontDescription" name="NotoSansOriya" family="Noto Sans Oriya" pointSize="20"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo 2" translatesAutoresizingMaskIntoConstraints="NO" id="Z7s-fS-E7u">
+                            <rect key="frame" x="20" y="12.5" width="55" height="55"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="55" id="C3O-Ll-GpH"/>
+                                <constraint firstAttribute="width" constant="55" id="WLs-kO-0ly"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="5PH-ym-pLe" firstAttribute="centerY" secondItem="GSV-xs-F5w" secondAttribute="centerY" id="3HJ-hv-5tr"/>
+                        <constraint firstItem="Z7s-fS-E7u" firstAttribute="leading" secondItem="GSV-xs-F5w" secondAttribute="leading" constant="20" symbolic="YES" id="GfM-XJ-TWW"/>
+                        <constraint firstAttribute="height" constant="80" id="d9q-3G-EML"/>
+                        <constraint firstItem="5PH-ym-pLe" firstAttribute="leading" secondItem="Z7s-fS-E7u" secondAttribute="trailing" constant="20" id="gCD-5k-m6I"/>
+                        <constraint firstItem="Z7s-fS-E7u" firstAttribute="centerY" secondItem="GSV-xs-F5w" secondAttribute="centerY" id="pJE-a0-zvP"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="BRQ-rz-mm2"/>
+            <color key="backgroundColor" systemColor="systemOrangeColor"/>
+            <constraints>
+                <constraint firstItem="BRQ-rz-mm2" firstAttribute="trailing" secondItem="GSV-xs-F5w" secondAttribute="trailing" id="4T3-f8-Nn9"/>
+                <constraint firstItem="BRQ-rz-mm2" firstAttribute="leading" secondItem="Ldy-Nw-mlB" secondAttribute="leading" constant="2" id="RTv-1r-Cmz"/>
+                <constraint firstItem="Ldy-Nw-mlB" firstAttribute="trailing" secondItem="BRQ-rz-mm2" secondAttribute="trailing" constant="1" id="pVe-gD-uLa"/>
+                <constraint firstItem="Ldy-Nw-mlB" firstAttribute="top" secondItem="GSV-xs-F5w" secondAttribute="bottom" id="rlD-XZ-nBK"/>
+                <constraint firstItem="GSV-xs-F5w" firstAttribute="leading" secondItem="BRQ-rz-mm2" secondAttribute="leading" id="rqT-e6-zM8"/>
+                <constraint firstItem="BRQ-rz-mm2" firstAttribute="top" secondItem="GSV-xs-F5w" secondAttribute="top" id="v4N-ES-3TL"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <splitViewMasterSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="0.0" y="-157"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="logo 2" width="111" height="111"/>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
