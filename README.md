@@ -23,6 +23,6 @@ pod install
 - Alamofire
 
 
-see too the app for android: [Android](https://github.com/bg-isma/chromerivals-android)
+see too the app for: [Android](https://github.com/bg-isma/chromerivals-android)
 
 Made with ![Image text](https://img.icons8.com/color/48/000000/like--v3.png) for ismitadev
