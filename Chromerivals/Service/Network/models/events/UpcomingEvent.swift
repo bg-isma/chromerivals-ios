@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UpcomingEvent: Event, Codable {
+struct UpcomingEvent: Event, Codable, Equatable {
     var deployTime: String? = nil
     var ani: String? = nil
     var bcu: String? = nil

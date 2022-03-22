@@ -20,3 +20,13 @@ struct SearchResponseResult: Codable {
 struct PediaResponse: Codable {
     var result: [String: String]? = nil
 }
+
+struct ItemResponse: Codable {
+    var result: Item? = nil
+}
+struct MonsterResponse: Codable {
+    var result: Monster? = nil
+}
+struct FixResponse: Codable {
+    var result: Fix? = nil
+}

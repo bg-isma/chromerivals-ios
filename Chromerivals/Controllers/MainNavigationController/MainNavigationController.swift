@@ -17,11 +17,10 @@ class MainNavigationController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
-        chromerivalsControllers[0].setNavigationBarHidden(true, animated: false)
-        chromerivalsControllers[1].setNavigationBarHidden(true, animated: false)
+
+        for (index, _) in chromerivalsControllers.enumerated() {
+            chromerivalsControllers[index].setNavigationBarHidden(true, animated: false)
+        }
         
         self.setViewControllers(chromerivalsControllers, animated: false)
         self.tabBar.toCRTabBar()
@@ -31,15 +30,4 @@ class MainNavigationController: UITabBarController {
         items[1].image = UIImage(named: "search")
     }
 
-    
-    
-}
-
-extension UITabBar {
-    
-    func toCRTabBar() {
-        self.tintColor = UIColor.CRPrimaryColor()
-        self.barTintColor = UIColor.CRGrayColor()
-    }
-    
 }

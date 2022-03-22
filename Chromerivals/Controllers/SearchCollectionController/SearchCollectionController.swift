@@ -11,9 +11,21 @@ private var reuseIdentifier = "pediaCell"
 private var pediaCellNibName = "SearchCollectionViewCell"
 private let searchCollectionNibName = "SearchCollectionView"
 
-class SearchCollectionController: UIViewController, CRViewComponent {
-
+class SearchCollectionController:
+    UIViewController,
+    UICollectionViewDataSource,
+    UICollectionViewDelegate,
+    CRViewComponent {
+    
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    var componentView: UIView {
+        self.view
+    }
+    
+    var height: CGFloat {
+        contentSize.height + insets.top + insets.bottom
+    }
     
     lazy var root: UIViewController? = nil
     lazy var chromerivalsService: CRPediaService = CRPediaService()
@@ -33,10 +45,27 @@ class SearchCollectionController: UIViewController, CRViewComponent {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.frame.size.height = contentSize.height + insets.top + insets.bottom
-        self.view.frame =  self.view.frame.inset(by: insets)
+        self.view.frame.size.height = height
+        self.view.frame = self.view.frame.inset(by: insets)
         let nameNib = UINib(nibName: pediaCellNibName, bundle: nil)
         self.collectionView.register(nameNib, forCellWithReuseIdentifier: reuseIdentifier)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return searchedItems.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SearchCollectionViewCell
+        cell.setUpCellContent(pediaElement: &searchedItems[indexPath.item])
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailController =
+        PediaItemDetailViewController(searchedItems[indexPath.item])
+        detailController.modalPresentationStyle = .fullScreen
+        root?.present(detailController, animated: false, completion: nil)
     }
     
     func filterByType(filterType: FilterType) {
@@ -46,6 +75,9 @@ class SearchCollectionController: UIViewController, CRViewComponent {
             }
             case .Monster: do {
                 searchedItems = searchedItemsNoFiltered.filter({ $0 is Monster })
+            }
+            case .Fix: do {
+                searchedItems = searchedItemsNoFiltered.filter({ $0 is Fix })
             }
             default: searchedItems = searchedItemsNoFiltered
         }
@@ -62,40 +94,6 @@ class SearchCollectionController: UIViewController, CRViewComponent {
         chromerivalsService.getSearchedItems(query: query) { items in
             self.reloadItemsControllerData(items)
         }
-    }
-    
-}
-
-extension UIImageView {
-
-    func makeRounded() {
-        self.layer.borderWidth = 1
-        self.layer.masksToBounds = false
-        self.layer.borderColor = UIColor.black.cgColor
-        self.layer.cornerRadius = self.frame.height / 2
-        self.clipsToBounds = true
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.CRPrimaryColor().cgColor
-    }
-    
-}
-
-extension SearchCollectionController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 75)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        1
     }
 
 }

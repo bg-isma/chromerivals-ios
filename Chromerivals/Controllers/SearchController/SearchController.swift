@@ -7,15 +7,23 @@
 
 import UIKit
 
-class SearchController: UIViewController, UITableViewDelegate, UITableViewDataSource, CRViewController {
+private let reuseIdentifier = "CRTableCell"
+private let searchControllerNibName = "CRTableViewCell"
+private let searchControllerTableNibName = "SearchView"
+
+class SearchController:
+    UIViewController,
+    UITableViewDelegate,
+    UITableViewDataSource,
+    CRViewController {
     
     @IBOutlet weak var searchTableViewContent: UITableView!
-    var tableView: UITableView? = nil
     
+    var tableView: UITableView? = nil
     var cRViewComponents: [CRViewComponent] = []
     
     init() {
-        super.init(nibName: "SearchView", bundle: nil)
+        super.init(nibName: searchControllerTableNibName, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -26,13 +34,13 @@ class SearchController: UIViewController, UITableViewDelegate, UITableViewDataSo
         super.viewDidLoad()
 
         tableView = searchTableViewContent
-        let nameNib = UINib(nibName: "CRTableViewCell", bundle: nil)
-        searchTableViewContent.register(nameNib, forCellReuseIdentifier: "CRTableCell")
+        let nameNib = UINib(nibName: searchControllerNibName, bundle: nil)
+        searchTableViewContent.register(nameNib, forCellReuseIdentifier: reuseIdentifier)
 
         let cRSearchCollectionController = SearchCollectionController(self)
         cRViewComponents = [
             SearchInputController(cRSearchCollectionController),
-            FilterChipsController([.All, .Item, .Monster], cRSearchCollectionController),
+            FilterChipsController(withFilters:[.All, .Item, .Monster], for: cRSearchCollectionController),
             cRSearchCollectionController
         ]
 
@@ -43,12 +51,12 @@ class SearchController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CRTableCell", for: indexPath) as! CRTableViewCell
-        return setUpCell(cell, indexPath.item)
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! CRTableViewCell
+        return setUpCell(with: cell, at: indexPath.item)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return setUpCellHeight(indexPath.item)
+        return setUpCellHeight(at: indexPath.item)
     }
     
 }

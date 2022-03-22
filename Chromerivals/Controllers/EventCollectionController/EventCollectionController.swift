@@ -11,9 +11,14 @@ private let reuseIdentifier = "cell"
 private let eventCellNibName = "EventCellView"
 private let eventCollectionNibName = "EventCollectionControllerView"
 
-class EventCollectionController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CRViewComponent {
+class EventCollectionController:
+    UIViewController,
+    UICollectionViewDataSource,
+    UICollectionViewDelegate,
+    CRViewComponent {
+
+    @IBOutlet var collectionView: UICollectionView!
     
-    lazy var direction: UICollectionView.ScrollDirection = .vertical
     var contentSize: CGSize {
         if (direction == .vertical) { return CGSize(width: 0, height: 300) }
         else { return CGSize(width: 0, height: 110) }
@@ -24,14 +29,20 @@ class EventCollectionController: UIViewController, UICollectionViewDataSource, U
         else { return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0) }
     }
     
+    var height: CGFloat {
+        contentSize.height + insets.top + insets.bottom
+    }
+    
+    var componentView: UIView {
+        self.view
+    }
+    
+    lazy var direction: UICollectionView.ScrollDirection = .vertical
     lazy var chromerivalsService: CREventsService = CREventsService()
     lazy var cRDataBase = CRDataBase()
-
-    lazy var events: [Event] = []
+    lazy var events: [Event] = [ /*CurrentEvent(endTime: "2022-03-22T04:10:00+01:00", mapName: "Castor")*/ ]
     lazy var eventsNoFiltered: [Event] = []
     lazy var type: EventCollectionType = .UpcomingEvents
-    
-    @IBOutlet var collectionView: UICollectionView!
     
     init(_ direction: UICollectionView.ScrollDirection,_ type: EventCollectionType) {
         super.init(nibName: eventCollectionNibName, bundle: nil)
@@ -45,8 +56,7 @@ class EventCollectionController: UIViewController, UICollectionViewDataSource, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.frame.size.height = contentSize.height + insets.top + insets.bottom
+        self.view.frame.size.height = height
         if let layout = self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = direction
         }
@@ -83,57 +93,8 @@ class EventCollectionController: UIViewController, UICollectionViewDataSource, U
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! EventViewCell
-        
-        let event = events[indexPath.item]
-        
-        if (event is UpcomingEvent) {
-            let event = events[indexPath.item] as! UpcomingEvent
-            cell.eventNationTimerText.text = event.deployTime?.toLocalDateString()
-            cell.setEventDate()
-            var actualEvent = events[indexPath.item] as! UpcomingEvent
-            if (actualEvent.ani != nil) {
-                cell.eventNationMapName.text = "Reynard beach"
-                cell.eventNationTypeName.text = "Mothership"
-                cell.eventNationTimerText.text = event.ani?.toLocalDateString()
-                cell.setToANINationCard()
-            }
-            if (actualEvent.bcu != nil) {
-                cell.eventNationMapName.text = "Tylent Jungle"
-                cell.eventNationTypeName.text = "Mothership"
-                cell.eventNationTimerText.text = event.bcu?.toLocalDateString()
-                cell.setToBCUNationCard()
-            }
-            if (actualEvent.influence != nil) {
-                switch (actualEvent.influence) {
-                    case 4: cell.setToANINationCard()
-                    case 2: cell.setToBCUNationCard()
-                    default: print("")
-                }
-            }
-            
-            if (actualEvent.outpostName != nil) {
-                cell.eventNationTypeName.text = "Outpost"
-                cell.eventNationMapName.text = actualEvent.outpostName?.deleteStrangeCharacters()
-            }
-        } else {
-            let current = event as! CurrentEvent
-            let endTime = current.endTime?.toLocalDate()
-            cell.eventNationTypeName.text = typeName(current.eventType ?? 0)
-            cell.eventNationMapName.text = current.mapName
-            cell.initTimer(controller: self, date: endTime ?? Date(), collectionPosition: indexPath.item)
-            cell.setToBCUNationCard()
-        }
-        
-        return cell
-    }
-    
-    func typeName(_ eventType: Double) -> String {
-       switch (Int(eventType)) {
-           case 27: return "Nation Kill Event"
-           case 28: return "Free For All"
-           case 3: return "Outpost"
-           default: return "Free For All"
-       }
+        cell.cellPosition = indexPath.item
+        return cell.getCellWithEventContent(withEvent: events[indexPath.item], and: self)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -146,15 +107,12 @@ class EventCollectionController: UIViewController, UICollectionViewDataSource, U
     }
     
     func filterByType(filterType: FilterType) {
-        let outpostCondition = { (event: UpcomingEvent) -> Bool in (event.outpostName != nil) }
-        let mothershipsCondition = { (event: UpcomingEvent) -> Bool in (event.ani != nil) || (event.bcu != nil) }
-        
         switch (filterType) {
             case .Outpost: do {
-                events = eventsNoFiltered.filter({ outpostCondition($0 as! UpcomingEvent) })
+                events = eventsNoFiltered.filter({ $0 is UpcomingEvent })
             }
             case .Motherships: do {
-                events = eventsNoFiltered.filter({ mothershipsCondition($0 as! UpcomingEvent) })
+                events = eventsNoFiltered.filter({ $0 is UpcomingEvent })
             }
             default: events = eventsNoFiltered
         }
@@ -201,89 +159,4 @@ class EventCollectionController: UIViewController, UICollectionViewDataSource, U
         }
     }
     
-
-    
 }
-
-extension String {
-    
-    func toLocalDate() -> Date {
-        let dateFormatter = DateFormatter() // set locale to reliable US_POSIX
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        dateFormatter.timeZone = TimeZone.current
-        let date = dateFormatter.date(from: self) ?? Date()
-        return date
-    }
-    
-    func toLocalDateString() -> String {
-        let dateFormatter = DateFormatter() // set locale to reliable US_POSIX
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        
-        dateFormatter.timeZone = TimeZone(identifier: "Europe/Paris")
-        var date = dateFormatter.date(from: self) ?? Date()
-        
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        let serverDateString = dateFormatter.string(from: date)
-        
-        dateFormatter.timeZone = TimeZone.current
-        date = dateFormatter.date(from: serverDateString) ?? Date()
-        
-        let calendar = Calendar(identifier: .gregorian)
-        let components = calendar.dateComponents([ .month, .day, .year, .hour, .minute], from: date)
-        
-        return String(format: "%02d-%02d-%02d %02d:%02d",
-                      components.year ?? "yyyy",
-                      components.month ?? "MM",
-                      components.day ?? "dd",
-                      components.hour ?? 00,
-                      components.minute ?? 00
-        )
-    }
-    
-}
-
-enum FilterType {
-    case All
-    case Motherships
-    case Outpost
-    case Item
-    case Monster
-    case Fix
-    
-    func getTypeText() -> String {
-        switch (self) {
-            case .Outpost: return "Outpost"
-            case .Motherships: return "Motherships"
-            case .Item: return "Item"
-            case .Monster: return "Monster"
-            case .Fix: return "Fix"
-            default: return "All"
-        }
-    }
-}
-
-extension EventCollectionController {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        switch (direction) {
-            case .vertical: return UIEdgeInsets(top: 1, left: 0, bottom: 1, right: 0)
-            case .horizontal: return UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
-            default: return  UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        1
-    }
-    
-}
-
-enum EventCollectionType {
-    case CurrentEvents
-    case UpcomingEvents
-}
-

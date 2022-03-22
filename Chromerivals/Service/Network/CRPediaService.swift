@@ -21,8 +21,8 @@ class CRPediaService: CRNetwork {
                case .success(_): do {
                    if let responseResult = response.value?.result {
                        let items = responseResult.items ?? []
-                       let monsters = responseResult.items ?? []
-                       let fixes = responseResult.items ?? []
+                       let monsters = responseResult.monsters ?? []
+                       let fixes = responseResult.fixes ?? []
                        completionHandler(items + monsters + fixes)
                    }
                }
@@ -58,8 +58,8 @@ class CRPediaService: CRNetwork {
            switch response.result {
                case .success(_): do {
                    if let responseResult = response.data {
-                       let result = try! JSONDecoder().decode(Monster.self, from: responseResult)
-                       completionHandler(result)
+                       let result = try! JSONDecoder().decode(MonsterResponse.self, from: responseResult)
+                       completionHandler(result.result ?? Monster())
                    }
                }
                case let .failure(error): do {
@@ -76,8 +76,8 @@ class CRPediaService: CRNetwork {
            switch response.result {
                case .success(_): do {
                    if let responseResult = response.data {
-                       let result = try! JSONDecoder().decode(Fix.self, from: responseResult)
-                       completionHandler(result)
+                       let result = try! JSONDecoder().decode(FixResponse.self, from: responseResult)
+                       completionHandler(result.result ?? Fix())
                    }
                }
                case let .failure(error): do {
@@ -102,15 +102,4 @@ class CRPediaService: CRNetwork {
         }
     }
     
-}
-
-
-struct ItemResponse: Codable {
-    var result: Item? = nil
-}
-struct MonsterResponse: Codable {
-    var result: Monster? = nil
-}
-struct FixResponse: Codable {
-    var result: Fix? = nil
 }

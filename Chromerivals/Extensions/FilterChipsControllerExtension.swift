@@ -1,23 +1,21 @@
 //
-//  SearchCollectionControllerExtension.swift
+//  FilterChipsControllerExtension.swift
 //  Chromerivals
 //
-//  Created by Ismael Bolaños García on 17/3/22.
+//  Created by Ismael Bolaños García on 21/3/22.
 //
 
+import Foundation
 import UIKit
 
+private let reuseIdentifier = "chipCell"
 
-private var reuseIdentifier = "pediaCell"
-
-extension SearchCollectionController: UICollectionViewDelegateFlowLayout {
+extension FilterChipsController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 75)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FilterChipCell
+        cell.filterChipText.text = filters[indexPath.item].rawValue
+        return CGSize(width: cell.filterChipText.intrinsicContentSize.width + 30, height: contentSize.height - 2)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -25,7 +23,7 @@ extension SearchCollectionController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        1
+        7
     }
     
 }

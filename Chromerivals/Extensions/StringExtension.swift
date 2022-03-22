@@ -17,4 +17,37 @@ extension String {
         return self
     }
     
+    func toLocalDate() -> Date {
+        let dateFormatter = DateFormatter() // set locale to reliable US_POSIX
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateFormatter.timeZone = TimeZone.current
+        let date = dateFormatter.date(from: self) ?? Date()
+        return date
+    }
+    
+    func toLocalDateString() -> String {
+        let dateFormatter = DateFormatter() // set locale to reliable US_POSIX
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        
+        dateFormatter.timeZone = TimeZone(identifier: "Europe/Paris")
+        var date = dateFormatter.date(from: self) ?? Date()
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let serverDateString = dateFormatter.string(from: date)
+        
+        dateFormatter.timeZone = TimeZone.current
+        date = dateFormatter.date(from: serverDateString) ?? Date()
+        
+        let calendar = Calendar(identifier: .gregorian)
+        let components = calendar.dateComponents([ .month, .day, .year, .hour, .minute], from: date)
+        
+        return String(format: "%02d-%02d-%02d %02d:%02d",
+                      components.year ?? "yyyy",
+                      components.month ?? "MM",
+                      components.day ?? "dd",
+                      components.hour ?? 00,
+                      components.minute ?? 00
+        )
+    }
+    
 }

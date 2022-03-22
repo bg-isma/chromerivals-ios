@@ -62,6 +62,15 @@
 		82C9814A27E40FBE004E889B /* CRTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82C9814927E40FBE004E889B /* CRTableViewCell.xib */; };
 		82C9814D27E4ECAE004E889B /* SearchInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9814C27E4ECAE004E889B /* SearchInputController.swift */; };
 		82C9815027E4EEA3004E889B /* SearchInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82C9814F27E4EEA3004E889B /* SearchInputView.xib */; };
+		82FD83A227E89C4200D261D5 /* CRViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FD83A127E89C4200D261D5 /* CRViewControllerExtension.swift */; };
+		82FD83A527E89F7600D261D5 /* FilterChipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FD83A427E89F7600D261D5 /* FilterChipCell.swift */; };
+		82FD83A727E8A04A00D261D5 /* FilterChipsControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FD83A627E8A04A00D261D5 /* FilterChipsControllerExtension.swift */; };
+		82FD83AB27E8AE2D00D261D5 /* CRViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FD83AA27E8AE2D00D261D5 /* CRViewComponent.swift */; };
+		82FD83AD27E8AE3D00D261D5 /* CRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FD83AC27E8AE3D00D261D5 /* CRViewController.swift */; };
+		82FD83AF27E95C2200D261D5 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FD83AE27E95C2100D261D5 /* UIImageViewExtension.swift */; };
+		82FD83B127E95CC500D261D5 /* UITabBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FD83B027E95CC500D261D5 /* UITabBarExtension.swift */; };
+		82FD83B527E95F5F00D261D5 /* EventCollectionControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FD83B427E95F5F00D261D5 /* EventCollectionControllerExtension.swift */; };
+		82FD83B727E9700B00D261D5 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FD83B627E9700B00D261D5 /* DateExtension.swift */; };
 		B0188156CBDA505C5D178B0E /* Pods_Chromerivals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB06ED7C06ED22670B65A28A /* Pods_Chromerivals.framework */; };
 /* End PBXBuildFile section */
 
@@ -144,6 +153,15 @@
 		82C9814927E40FBE004E889B /* CRTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CRTableViewCell.xib; sourceTree = "<group>"; };
 		82C9814C27E4ECAE004E889B /* SearchInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInputController.swift; sourceTree = "<group>"; };
 		82C9814F27E4EEA3004E889B /* SearchInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchInputView.xib; sourceTree = "<group>"; };
+		82FD83A127E89C4200D261D5 /* CRViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRViewControllerExtension.swift; sourceTree = "<group>"; };
+		82FD83A427E89F7600D261D5 /* FilterChipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterChipCell.swift; sourceTree = "<group>"; };
+		82FD83A627E8A04A00D261D5 /* FilterChipsControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterChipsControllerExtension.swift; sourceTree = "<group>"; };
+		82FD83AA27E8AE2D00D261D5 /* CRViewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRViewComponent.swift; sourceTree = "<group>"; };
+		82FD83AC27E8AE3D00D261D5 /* CRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRViewController.swift; sourceTree = "<group>"; };
+		82FD83AE27E95C2100D261D5 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		82FD83B027E95CC500D261D5 /* UITabBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarExtension.swift; sourceTree = "<group>"; };
+		82FD83B427E95F5F00D261D5 /* EventCollectionControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionControllerExtension.swift; sourceTree = "<group>"; };
+		82FD83B627E9700B00D261D5 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		BB06ED7C06ED22670B65A28A /* Pods_Chromerivals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chromerivals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -215,6 +233,7 @@
 		82438DC827D91391001F8E04 /* Chromerivals */ = {
 			isa = PBXGroup;
 			children = (
+				82FD83A827E8AE0F00D261D5 /* Core */,
 				82438E7627DA35CA001F8E04 /* Shared */,
 				82438E4027D97610001F8E04 /* Service */,
 				82438E3F27D97601001F8E04 /* Extensions */,
@@ -284,6 +303,12 @@
 				82C9812727E3000B004E889B /* UILabelExtension.swift */,
 				82C9812927E3001D004E889B /* StringExtension.swift */,
 				82C9814427E32C5A004E889B /* UITextFieldExtension.swift */,
+				82FD83A127E89C4200D261D5 /* CRViewControllerExtension.swift */,
+				82FD83A627E8A04A00D261D5 /* FilterChipsControllerExtension.swift */,
+				82FD83AE27E95C2100D261D5 /* UIImageViewExtension.swift */,
+				82FD83B027E95CC500D261D5 /* UITabBarExtension.swift */,
+				82FD83B427E95F5F00D261D5 /* EventCollectionControllerExtension.swift */,
+				82FD83B627E9700B00D261D5 /* DateExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -453,6 +478,7 @@
 		82438ECF27DC5490001F8E04 /* FilterChipsController */ = {
 			isa = PBXGroup;
 			children = (
+				82FD83A327E89F2B00D261D5 /* FilterChipCellController */,
 				82438ED027DC552B001F8E04 /* FilterChipsController.swift */,
 			);
 			path = FilterChipsController;
@@ -599,6 +625,31 @@
 				82C9814F27E4EEA3004E889B /* SearchInputView.xib */,
 			);
 			path = SearchInputView;
+			sourceTree = "<group>";
+		};
+		82FD83A327E89F2B00D261D5 /* FilterChipCellController */ = {
+			isa = PBXGroup;
+			children = (
+				82FD83A427E89F7600D261D5 /* FilterChipCell.swift */,
+			);
+			path = FilterChipCellController;
+			sourceTree = "<group>";
+		};
+		82FD83A827E8AE0F00D261D5 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				82FD83A927E8AE1600D261D5 /* protocols */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		82FD83A927E8AE1600D261D5 /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				82FD83AA27E8AE2D00D261D5 /* CRViewComponent.swift */,
+				82FD83AC27E8AE3D00D261D5 /* CRViewController.swift */,
+			);
+			path = protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -795,22 +846,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				82438E4D27D9780D001F8E04 /* CurrentEvent.swift in Sources */,
+				82FD83A527E89F7600D261D5 /* FilterChipCell.swift in Sources */,
+				82FD83A227E89C4200D261D5 /* CRViewControllerExtension.swift in Sources */,
 				82C9813627E328AD004E889B /* Monster.swift in Sources */,
 				82438E6327D9A08E001F8E04 /* SearchController.swift in Sources */,
 				826F8FA427DF9955008FE7E2 /* CRPediaService.swift in Sources */,
 				82C9813827E32914004E889B /* Item.swift in Sources */,
+				82FD83AB27E8AE2D00D261D5 /* CRViewComponent.swift in Sources */,
 				82C9814527E32C5A004E889B /* UITextFieldExtension.swift in Sources */,
 				82C9813C27E3297A004E889B /* CRNetwork.swift in Sources */,
 				82438EE027DE8DB3001F8E04 /* SearchCollectionController.swift in Sources */,
+				82FD83B527E95F5F00D261D5 /* EventCollectionControllerExtension.swift in Sources */,
 				82C9812827E3000B004E889B /* UILabelExtension.swift in Sources */,
 				826F8FA727DFADD4008FE7E2 /* PediaElement.swift in Sources */,
+				82FD83AD27E8AE3D00D261D5 /* CRViewController.swift in Sources */,
 				82438E4B27D977F6001F8E04 /* UpcomingEvent.swift in Sources */,
 				82438DCA27D91391001F8E04 /* AppDelegate.swift in Sources */,
+				82FD83B727E9700B00D261D5 /* DateExtension.swift in Sources */,
 				82C9812627E2FA24004E889B /* SearchCollectionControllerExtension.swift in Sources */,
 				82C9814327E32B40004E889B /* ExpandableItem.swift in Sources */,
 				82438DFE27D92743001F8E04 /* MainNavigationController.swift in Sources */,
 				82C9812D27E3086D004E889B /* SearchCollectionViewCell.swift in Sources */,
 				82438E5527D97ACC001F8E04 /* PediaResponses.swift in Sources */,
+				82FD83AF27E95C2200D261D5 /* UIImageViewExtension.swift in Sources */,
 				82438E5B27D99E3A001F8E04 /* HomeController.swift in Sources */,
 				82438E5327D97AA8001F8E04 /* EventResponses.swift in Sources */,
 				82C9814127E32AE4004E889B /* Fixe.swift in Sources */,
@@ -824,11 +882,13 @@
 				826F8FB027E1714E008FE7E2 /* PediaItemDetailViewController.swift in Sources */,
 				82438DCC27D91391001F8E04 /* SceneDelegate.swift in Sources */,
 				82438ED127DC552B001F8E04 /* FilterChipsController.swift in Sources */,
+				82FD83B127E95CC500D261D5 /* UITabBarExtension.swift in Sources */,
 				82438E7327DA15A8001F8E04 /* HomeHeaderController.swift in Sources */,
 				82C9812F27E324BB004E889B /* CRDataBase.swift in Sources */,
 				82C9813A27E32933004E889B /* NetworkRsponse.swift in Sources */,
 				82C9812A27E3001D004E889B /* StringExtension.swift in Sources */,
 				82438E7527DA2918001F8E04 /* UIColorExtension.swift in Sources */,
+				82FD83A727E8A04A00D261D5 /* FilterChipsControllerExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

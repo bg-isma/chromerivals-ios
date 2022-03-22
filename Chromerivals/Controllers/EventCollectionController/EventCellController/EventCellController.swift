@@ -15,43 +15,31 @@ class EventViewCell: UICollectionViewCell {
     @IBOutlet weak var eventNationTimerText: UILabel!
     @IBOutlet weak var eventNationLogo: UIImageView!
     
-    lazy var collectionViewPosition = 0
     lazy var nowDate = Date()
-    lazy var referenceDate = Date()
-    lazy var eventController: EventCollectionController? = nil
-    
+    lazy var cellPosition = 0
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        eventCellContent.layer.cornerRadius = 10
         setUpCell()
     }
     
-    func initTimer(controller: EventCollectionController, date: Date, collectionPosition: Int) {
-        self.referenceDate = date
-        self.eventController = controller
-        self.collectionViewPosition = collectionPosition
+    func initTimer(controller: EventCollectionController, date: Date) {
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [self] timer in
-            self.eventNationTimerText.text = self.countDownString(from: self.nowDate, until: self.referenceDate)
+            self.eventNationTimerText.text = self.nowDate.countDownString(until: date)
             self.nowDate = Date()
-            if (self.nowDate > self.referenceDate) {
+            if (self.nowDate > date) {
                 timer.invalidate()
                 
-                let events = self.eventController?.events ?? []
+                let events = controller.events
                 for (index, _) in events.enumerated() {
-                    if (index == self.collectionViewPosition) {
-                        self.eventController?.events.remove(at: index)
-                        self.eventController?.collectionView.reloadData()
+                    if (index == cellPosition) {
+                        controller.events.remove(at: index)
+                        controller.collectionView.reloadData()
                     }
                 }
                 
             }
         }
-    }
-    
-    func countDownString(from date: Date, until nowDate: Date) -> String {
-        let calendar = Calendar(identifier: .gregorian)
-        let components = calendar.dateComponents([.minute, .second], from: date, to: nowDate)
-        return String(format: "%02d:%02d", components.minute ?? 00, components.second ?? 00)
     }
     
     func setToANINationCard() {
@@ -72,6 +60,87 @@ class EventViewCell: UICollectionViewCell {
         eventNationMapName.font = UIFont(name: "Nunito Sans ExtraBold", size: 20)
         eventNationTypeName.font = UIFont(name: "Nunito Sans Bold", size: 17)
         eventNationTimerText.font = UIFont(name: "Nunito Sans SemiBold", size: 20)
+        eventCellContent.layer.cornerRadius = 10
+    }
+    
+    func getCellWithEventContent(
+        withEvent event: Event,
+        and controller: EventCollectionController
+    ) -> EventViewCell {
+        switch (event) {
+            case is UpcomingEvent: do {
+                let upcomingEvent = event as! UpcomingEvent
+                setUpcomingEventContent(with: upcomingEvent)
+                setCellNation(nation: Int(upcomingEvent.influence ?? 2))
+            }
+            case is CurrentEvent: do {
+                let currentEvent = event as! CurrentEvent
+                setCurrentEventContent(with: currentEvent, and: controller)
+            }
+            default: print("other type")
+        }
+        return self
+    }
+    
+    private func setCellNation(nation: Int) {
+        switch (nation) {
+            case 4: setToANINationCard()
+            case 2: setToBCUNationCard()
+            default: print("")
+        }
+    }
+    
+    private func setCurrentEventContent(
+        with currentEvent: CurrentEvent,
+        and controller: EventCollectionController
+    ) {
+        let endTime = currentEvent.endTime?.toLocalDate()
+        eventNationTypeName.text = typeName(currentEvent.eventType ?? 0)
+        eventNationMapName.text = currentEvent.mapName
+        initTimer(controller: controller, date: endTime ?? Date())
+        setToBCUNationCard()
+    }
+    
+    private func typeName(_ eventType: Double) -> String {
+       switch (Int(eventType)) {
+           case 27: return "Nation Kill Event"
+           case 28: return "Free For All"
+           case 3: return "Outpost"
+           default: return "Free For All"
+       }
+    }
+    
+    private func setUpcomingEventContent(with upcomingEvent: UpcomingEvent) {
+        switch (upcomingEvent) {
+            case upcomingEvent where upcomingEvent.ani != nil: do {
+                let date = upcomingEvent.ani?.toLocalDateString() ?? ""
+                setMothership(withMapName: "Reynard beach", andDate: date)
+            }
+            case upcomingEvent where upcomingEvent.bcu != nil: do {
+                let date = upcomingEvent.bcu?.toLocalDateString() ?? ""
+                setMothership(withMapName: "Tylent Jungle", andDate: date)
+            }
+            case upcomingEvent where upcomingEvent.outpostName != nil: do {
+                var mapName = upcomingEvent.outpostName ?? ""
+                let mapNameFormated = mapName.deleteStrangeCharacters()
+                let date = upcomingEvent.deployTime?.toLocalDateString() ?? ""
+                setOutpost(withMapName: mapNameFormated, andDate: date)
+            }
+            default: print("")
+        }
+        setEventDate()
+    }
+    
+    private func setMothership(withMapName mapName: String, andDate date: String) {
+        eventNationMapName.text = mapName
+        eventNationTypeName.text = "Mothership"
+        eventNationTimerText.text = date
+    }
+    
+    private func setOutpost(withMapName mapName: String, andDate date: String) {
+        eventNationMapName.text = mapName
+        eventNationTypeName.text = "Outpost"
+        eventNationTimerText.text = date
     }
     
 }
