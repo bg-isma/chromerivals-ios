@@ -10,5 +10,5 @@ import UIKit
 
 protocol CRViewController {
     var cRViewComponents: [CRViewComponent] { get set }
-    var tableView: UITableView? { get set }
+    var dataSource: CRDataSource { get }
 }

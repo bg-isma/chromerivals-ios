@@ -23,18 +23,18 @@
                             <constraint firstAttribute="height" constant="60" id="xjK-LC-dPx"/>
                         </constraints>
                     </imageView>
-                    <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="akar-icons_arrow-right" translatesAutoresizingMaskIntoConstraints="NO" id="668-tc-nrj">
-                        <rect key="frame" x="343" y="36" width="25" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="25" id="WFT-7f-vr8"/>
-                            <constraint firstAttribute="height" constant="20" id="x6E-gf-JY5"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kou-fy-z2P">
                         <rect key="frame" x="81" y="36" width="41.5" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </label>
+                    <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="akar-icons_arrow-right" translatesAutoresizingMaskIntoConstraints="NO" id="668-tc-nrj">
+                        <rect key="frame" x="341" y="36" width="25" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="WFT-7f-vr8"/>
+                            <constraint firstAttribute="height" constant="20" id="x6E-gf-JY5"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="kou-fy-z2P" firstAttribute="centerY" secondItem="668-tc-nrj" secondAttribute="centerY" id="DtR-H3-XHf"/>

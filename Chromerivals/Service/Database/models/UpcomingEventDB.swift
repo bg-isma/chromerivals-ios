@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class UpcomingEventDB: Object, Event {
+class UpcomingEventDB: Object {
     @Persisted var deployTime: String? = nil
     @Persisted var ani: String? = nil
     @Persisted var bcu: String? = nil

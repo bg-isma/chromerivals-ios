@@ -16,7 +16,7 @@ class EventViewCell: UICollectionViewCell {
     @IBOutlet weak var eventNationLogo: UIImageView!
     
     lazy var nowDate = Date()
-    lazy var cellPosition = 0
+    lazy var event: Event? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,16 +28,9 @@ class EventViewCell: UICollectionViewCell {
             self.eventNationTimerText.text = self.nowDate.countDownString(until: date)
             self.nowDate = Date()
             if (self.nowDate > date) {
+                guard let event = self.event else { return }
+                controller.eventRepository.deleteCurrentEvent(with: event)
                 timer.invalidate()
-                
-                let events = controller.events
-                for (index, _) in events.enumerated() {
-                    if (index == cellPosition) {
-                        controller.events.remove(at: index)
-                        controller.collectionView.reloadData()
-                    }
-                }
-                
             }
         }
     }
@@ -67,17 +60,9 @@ class EventViewCell: UICollectionViewCell {
         withEvent event: Event,
         and controller: EventCollectionController
     ) -> EventViewCell {
-        switch (event) {
-            case is UpcomingEvent: do {
-                let upcomingEvent = event as! UpcomingEvent
-                setUpcomingEventContent(with: upcomingEvent)
-                setCellNation(nation: Int(upcomingEvent.influence ?? 2))
-            }
-            case is CurrentEvent: do {
-                let currentEvent = event as! CurrentEvent
-                setCurrentEventContent(with: currentEvent, and: controller)
-            }
-            default: print("other type")
+        switch (event.type) {
+            case .UpcomingEvent: setUpcomingEventContent(with: event)
+            case .CurrentEvent: setCurrentEventContent(with: event, and: controller)
         }
         return self
     }
@@ -86,19 +71,20 @@ class EventViewCell: UICollectionViewCell {
         switch (nation) {
             case 4: setToANINationCard()
             case 2: setToBCUNationCard()
-            default: print("")
+            default: setToANINationCard()
         }
     }
     
     private func setCurrentEventContent(
-        with currentEvent: CurrentEvent,
+        with currentEvent: Event,
         and controller: EventCollectionController
     ) {
-        let endTime = currentEvent.endTime?.toLocalDate()
-        eventNationTypeName.text = typeName(currentEvent.eventType ?? 0)
-        eventNationMapName.text = currentEvent.mapName
+        var event = currentEvent
+        let endTime = event.endTime?.toLocalDate()
+        eventNationTypeName.text = typeName(event.eventType ?? 0)
+        eventNationMapName.text = event.mapsName?.deleteStrangeCharacters() ?? ""
         initTimer(controller: controller, date: endTime ?? Date())
-        setToBCUNationCard()
+        setCellNation(nation: Int(event.influenceType ?? 2))
     }
     
     private func typeName(_ eventType: Double) -> String {
@@ -106,25 +92,29 @@ class EventViewCell: UICollectionViewCell {
            case 27: return "Nation Kill Event"
            case 28: return "Free For All"
            case 3: return "Outpost"
+           case 4: return "Mothership"
            default: return "Free For All"
        }
     }
     
-    private func setUpcomingEventContent(with upcomingEvent: UpcomingEvent) {
+    private func setUpcomingEventContent(with upcomingEvent: Event) {
         switch (upcomingEvent) {
             case upcomingEvent where upcomingEvent.ani != nil: do {
                 let date = upcomingEvent.ani?.toLocalDateString() ?? ""
                 setMothership(withMapName: "Reynard beach", andDate: date)
+                setCellNation(nation: Int(upcomingEvent.influence ?? 4))
             }
             case upcomingEvent where upcomingEvent.bcu != nil: do {
                 let date = upcomingEvent.bcu?.toLocalDateString() ?? ""
                 setMothership(withMapName: "Tylent Jungle", andDate: date)
+                setCellNation(nation: Int(upcomingEvent.influence ?? 2))
             }
             case upcomingEvent where upcomingEvent.outpostName != nil: do {
                 var mapName = upcomingEvent.outpostName ?? ""
                 let mapNameFormated = mapName.deleteStrangeCharacters()
                 let date = upcomingEvent.deployTime?.toLocalDateString() ?? ""
                 setOutpost(withMapName: mapNameFormated, andDate: date)
+                setCellNation(nation: Int(upcomingEvent.influence ?? 2))
             }
             default: print("")
         }

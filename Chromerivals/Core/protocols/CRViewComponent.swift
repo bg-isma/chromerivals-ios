@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol CRViewComponent {
+protocol CRViewComponent{
     var contentSize: CGSize { get }
     var insets: UIEdgeInsets { get }
     var height: CGFloat { get }
@@ -22,4 +22,13 @@ enum FilterType: String {
     case Item = "Item"
     case Monster = "Monster"
     case Fix = "Fix"
+}
+
+enum CRSection: Hashable {
+    case Filter
+    case EventList(UICollectionView.ScrollDirection)
+    case SearchList
+    case SearchInput
+    case Title(String)
+    case Header
 }

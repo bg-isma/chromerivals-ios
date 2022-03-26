@@ -9,32 +9,37 @@ import UIKit
 
 private let reuseIdentifier = "CRTableCell"
 private let homeControllerNibName = "HomeView"
+private let homeTableViewCellNibName = "CRTableViewCell"
 
-class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSource, CRViewController {
+final class HomeController: UIViewController, CRViewController, UITableViewDelegate {
     
     @IBOutlet weak var homeViewTableContent: UITableView!
-    var tableView: UITableView? = nil
     
-    lazy var cRViewComponents: [CRViewComponent] = []
-    
-    init() {
-        super.init(nibName: homeControllerNibName, bundle: nil)
+    lazy var dataSource: CRDataSource = CRDataSource(tableView: self.homeViewTableContent) { tableview, indexPath, cRComponent in
+        return self.setUpCell(at: indexPath, in: tableview, andID: reuseIdentifier)
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    var snapshot: NSDiffableDataSourceSnapshot<CRSection, UIResponder> {
+        var snapshot = NSDiffableDataSourceSnapshot<CRSection, UIResponder>()
+        let sections: [CRSection] = [
+            .Header,
+            .Title("1"),
+            .EventList(.horizontal),
+            .Title("2"),
+            .Filter,
+            .EventList(.vertical)
+        ]
+        snapshot.appendSections(sections)
+        
+        for (index, section) in sections.enumerated() {
+            snapshot.appendItems([self.cRViewComponents[index] as! UIResponder], toSection: section)
+        }
+        return snapshot
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.view.backgroundColor = UIColor.CRPrimaryColor()
-        tableView = homeViewTableContent
-        let nameNib = UINib(nibName: "CRTableViewCell", bundle: nil)
-        homeViewTableContent.register(nameNib, forCellReuseIdentifier: "CRTableCell")
-        
+    lazy var cRViewComponents: [CRViewComponent] = { () -> [CRViewComponent] in
         let cREventCollectionComponentVertical = EventCollectionController(.vertical, .UpcomingEvents)
-        self.cRViewComponents = [
+        let components: [CRViewComponent] = [
             HomeHeaderController(),
             UILabel().toChromeRivalsHeader(text: "Current Events", width: self.view.frame.width),
             EventCollectionController(.horizontal, .CurrentEvents),
@@ -42,22 +47,42 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
             FilterChipsController(withFilters: [.All, .Motherships, .Outpost], for: cREventCollectionComponentVertical),
             cREventCollectionComponentVertical
         ]
+        return components
+    }()
+    
+    init() {
+        super.init(nibName: homeControllerNibName, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cRViewComponents.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! CRTableViewCell
-        return setUpCell(with: cell, at: indexPath.item)
+        self.title = "Events"
+        
+        setUpTableView()
+        self.view.backgroundColor = UIColor.CRPrimaryColor()
+        let nameNib = UINib(nibName: homeTableViewCellNibName, bundle: nil)
+        homeViewTableContent.register(nameNib, forCellReuseIdentifier: reuseIdentifier)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return setUpCellHeight(at: indexPath.item)
+        let height = setUpCellHeight(at: indexPath.section, in: tableView)
+        return height
     }
     
+    func setUpTableView() {
+        homeViewTableContent.dataSource = dataSource
+        homeViewTableContent.frame.size.height = self.view.frame.height
+        homeViewTableContent.backgroundColor = .red
+        dataSource.apply(snapshot)
+    }
+
 }
 
 class CRTableViewCell: UITableViewCell {}
+
+class CRDataSource: UITableViewDiffableDataSource<CRSection, UIResponder> {}

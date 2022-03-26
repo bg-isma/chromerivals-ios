@@ -16,10 +16,6 @@ struct MothershipsResponseResult: Codable {
     var bcu: String? = nil
 }
 
-struct OutpostsResponse: Codable, NetworkResponse {
-    var result: Array<UpcomingEvent>? = nil
-}
-
-struct CurrentEventsResponse: Codable, NetworkResponse {
-    var result: Array<CurrentEvent>? = nil
+struct EventResponse: Codable, NetworkResponse {
+    var result: Array<Event>? = nil
 }

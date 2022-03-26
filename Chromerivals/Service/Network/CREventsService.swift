@@ -10,57 +10,63 @@ import Alamofire
 
 class CREventsService: CRNetwork {
     
-    typealias CompletionHandler = (_ response: [Event]) -> Void
+    // typealias CompletionHandler = (_ response: [Event]) -> Void
     
-    func getMotherships(_ completionHandler: @escaping CompletionHandler) -> Void {
-        requestWithNetworkData(NetworkData.GetMotherships).responseDecodable(of: MothershipsResponse.self)
-        { response in
-           switch response.result {
-               case .success(_): do {
-                   if let responseResult = response.value?.result {
-                       completionHandler([
-                        UpcomingEvent(ani: responseResult.bcu),
-                        UpcomingEvent(bcu: responseResult.bcu)
-                       ])
+    func getMotherships() async throws -> [Event] {
+        return try await withCheckedThrowingContinuation({ continuation in
+            requestWithNetworkData(NetworkData.GetMotherships).responseDecodable(of: MothershipsResponse.self)
+            { response in
+               switch response.result {
+                   case .success(_): do {
+                       if let responseResult = response.value?.result {
+                           continuation.resume(returning: [
+                            Event(ani: responseResult.bcu),
+                            Event(bcu: responseResult.bcu)
+                           ])
+                       }
+                   }
+                   case let .failure(error): do {
+                       print("ERROR: \(error)")
+                       continuation.resume(returning: [])
                    }
                }
-               case let .failure(error): do {
-                   print("ERROR: \(error)")
-                   completionHandler([])
-               }
            }
-       }
+        })
     }
 
-    func getOutposts(_ completionHandler: @escaping CompletionHandler) -> Void {
-        requestWithNetworkData(NetworkData.GetOutposts).responseDecodable(of: OutpostsResponse.self)
-        { response in
-           switch response.result {
-               case .success(_): do {
-                   if let responseResult = response.value?.result {
-                       completionHandler(responseResult)
+    func getOutposts() async throws -> [Event] {
+        return try await withCheckedThrowingContinuation({ continuation in
+            requestWithNetworkData(NetworkData.GetOutposts).responseDecodable(of: EventResponse.self)
+            { response in
+               switch response.result {
+                   case .success(_): do {
+                       if let responseResult = response.value?.result {
+                           continuation.resume(returning: responseResult)
+                       }
+                   }
+                   case let .failure(error): do {
+                       print("ERROR: \(error)")
+                       continuation.resume(returning: [])
                    }
                }
-               case let .failure(error): do {
-                   print("ERROR: \(error)")
-                   completionHandler([])
-               }
            }
-       }
+        })
     }
 
-    func getCurrentEvents(_ completionHandler: @escaping CompletionHandler) -> Void {
-        requestWithNetworkData(NetworkData.GetCurrentEvents).responseDecodable(of: CurrentEventsResponse.self) { response in
-            switch response.result {
-                case .success(_): do {
-                    completionHandler(response.value?.result ?? [])
-                }
-                case let .failure(error): do {
-                    print("ERROR: \(error)")
-                    completionHandler([])
+    func getCurrentEvents() async throws -> [Event] {
+        return try await withCheckedThrowingContinuation({ continuation in
+            requestWithNetworkData(NetworkData.GetCurrentEvents).responseDecodable(of: EventResponse.self) { response in
+                switch response.result {
+                    case .success(_): do {
+                        continuation.resume(returning: response.value?.result ?? [])
+                    }
+                    case let .failure(error): do {
+                        print("ERROR: \(error)")
+                        continuation.resume(returning: [])
+                    }
                 }
             }
-        }
+        })
     }
     
 }

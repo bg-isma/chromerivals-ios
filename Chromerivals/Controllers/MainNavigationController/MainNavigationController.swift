@@ -22,6 +22,9 @@ class MainNavigationController: UITabBarController {
             chromerivalsControllers[index].setNavigationBarHidden(true, animated: false)
         }
         
+        chromerivalsControllers[0].title = "Events"
+        chromerivalsControllers[1].title = "Search"
+        
         self.setViewControllers(chromerivalsControllers, animated: false)
         self.tabBar.toCRTabBar()
         

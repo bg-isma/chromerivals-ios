@@ -11,13 +11,18 @@ private let reuseIdentifier = "cell"
 private let eventCellNibName = "EventCellView"
 private let eventCollectionNibName = "EventCollectionControllerView"
 
-class EventCollectionController:
-    UIViewController,
-    UICollectionViewDataSource,
-    UICollectionViewDelegate,
-    CRViewComponent {
+final class EventCollectionController: UIViewController, UICollectionViewDelegate, CRViewComponent {
 
     @IBOutlet var collectionView: UICollectionView!
+    
+    lazy var id: UUID = UUID()
+    
+    var eventRepository: EventRepository = EventRepository.shared
+    lazy var dataSource: EventDataSource = EventDataSource(collectionView: self.collectionView) { collectionView, indexPath, event in
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! EventViewCell
+        cell.event = event
+        return cell.getCellWithEventContent(withEvent: event, and: self)
+    }
     
     var contentSize: CGSize {
         if (direction == .vertical) { return CGSize(width: 0, height: 300) }
@@ -33,21 +38,18 @@ class EventCollectionController:
         contentSize.height + insets.top + insets.bottom
     }
     
-    var componentView: UIView {
-        self.view
-    }
+    var componentView: UIView { self.view }
     
     lazy var direction: UICollectionView.ScrollDirection = .vertical
-    lazy var chromerivalsService: CREventsService = CREventsService()
-    lazy var cRDataBase = CRDataBase()
-    lazy var events: [Event] = [ /*CurrentEvent(endTime: "2022-03-22T04:10:00+01:00", mapName: "Castor")*/ ]
-    lazy var eventsNoFiltered: [Event] = []
-    lazy var type: EventCollectionType = .UpcomingEvents
+    lazy var type: Event.EventType = .UpcomingEvent
     
     init(_ direction: UICollectionView.ScrollDirection,_ type: EventCollectionType) {
         super.init(nibName: eventCollectionNibName, bundle: nil)
         self.direction = direction
-        self.type = type
+        switch(type) {
+            case .UpcomingEvents: self.type = .UpcomingEvent
+            case .CurrentEvents: self.type = .CurrentEvent
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -60,18 +62,17 @@ class EventCollectionController:
         if let layout = self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = direction
         }
-        
         let eventNib = UINib(nibName: eventCellNibName, bundle: nil)
         collectionView.register(eventNib, forCellWithReuseIdentifier: reuseIdentifier)
-        
+        collectionView.dataSource = dataSource
+
+        handleEvents()
         setInsets()
-        getEvents()
     }
     
-    func getEvents() {
-        switch (type) {
-            case .UpcomingEvents: getUpcomingEvents()
-            case .CurrentEvents: getCurrentEvents()
+    func handleEvents() {
+        NotificationCenter.default.addObserver(forName: .eventsUpdate, object: nil, queue: .main) { [self] observer in
+            dataSource.apply(eventRepository.getEventSnapshot(withType: type))
         }
     }
     
@@ -87,16 +88,6 @@ class EventCollectionController:
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return events.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! EventViewCell
-        cell.cellPosition = indexPath.item
-        return cell.getCellWithEventContent(withEvent: events[indexPath.item], and: self)
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellHeight = CGFloat(109)
         switch (direction) {
@@ -106,57 +97,6 @@ class EventCollectionController:
         }
     }
     
-    func filterByType(filterType: FilterType) {
-        switch (filterType) {
-            case .Outpost: do {
-                events = eventsNoFiltered.filter({ $0 is UpcomingEvent })
-            }
-            case .Motherships: do {
-                events = eventsNoFiltered.filter({ $0 is UpcomingEvent })
-            }
-            default: events = eventsNoFiltered
-        }
-        collectionView.reloadData()
-    }
-    
-    func reloadEventControllerData(_ newEvents: [Event]) {
-        events = newEvents
-        eventsNoFiltered = newEvents
-        collectionView.reloadData()
-    }
-    
-    func getUpcomingEvents() {
-        chromerivalsService.getOutposts() { outpost in
-            self.chromerivalsService.getMotherships() { motherships in
-                var events = outpost + motherships
-                if (events.count == 0) {
-                    events = self.cRDataBase.getAllEvents()
-                } else { self.setEventsOnDataBase(events as! [UpcomingEvent]) }
-                self.reloadEventControllerData(events)
-            }
-        }
-    }
-    
-    func setEventsOnDataBase(_ events: [UpcomingEvent]) {
-        DispatchQueue(label: "background").async {
-            self.cRDataBase.deleteAllEvents()
-            for event in events {
-                let upcomingEvent = UpcomingEventDB(
-                    deployTime: event.deployTime,
-                    ani: event.ani,
-                    bcu: event.bcu,
-                    outpostName: event.outpostName,
-                    influence: event.influence
-                )
-                self.cRDataBase.addEvent(event: upcomingEvent)
-            }
-        }
-    }
-    
-    func getCurrentEvents() {
-        chromerivalsService.getCurrentEvents { currentEvents in
-            self.reloadEventControllerData(currentEvents)
-        }
-    }
-    
 }
+
+final class EventDataSource: UICollectionViewDiffableDataSource<Event, Event> {}

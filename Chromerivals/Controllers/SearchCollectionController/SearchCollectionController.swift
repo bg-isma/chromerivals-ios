@@ -13,11 +13,18 @@ private let searchCollectionNibName = "SearchCollectionView"
 
 class SearchCollectionController:
     UIViewController,
-    UICollectionViewDataSource,
     UICollectionViewDelegate,
     CRViewComponent {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    var pediaRepository: PediaRepository = PediaRepository.shared
+    lazy var dataSource: PediaDataSource = PediaDataSource(collectionView: self.collectionView) { collectionView, indexPath, pediaElement in
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SearchCollectionViewCell
+        cell.frame.size.width = collectionView.frame.width - 10
+        cell.setUpCellContent(pediaElement: pediaElement)
+        return cell
+    }
     
     var componentView: UIView {
         self.view
@@ -28,9 +35,6 @@ class SearchCollectionController:
     }
     
     lazy var root: UIViewController? = nil
-    lazy var chromerivalsService: CRPediaService = CRPediaService()
-    lazy var searchedItems: [PediaElement] = []
-    lazy var searchedItemsNoFiltered: [PediaElement] = []
     lazy var contentSize: CGSize = CGSize(width: 0, height: 300)
     lazy var insets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
     
@@ -49,51 +53,25 @@ class SearchCollectionController:
         self.view.frame = self.view.frame.inset(by: insets)
         let nameNib = UINib(nibName: pediaCellNibName, bundle: nil)
         self.collectionView.register(nameNib, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView.dataSource = dataSource
+        handleEvents()
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchedItems.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SearchCollectionViewCell
-        cell.setUpCellContent(pediaElement: &searchedItems[indexPath.item])
-        return cell
+    func handleEvents() {
+        NotificationCenter.default.addObserver(forName: .searchItems, object: nil, queue: .main) { [self] observer in
+            dataSource.apply(pediaRepository.getSearchSnapshot())
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        /*
         let detailController =
         PediaItemDetailViewController(searchedItems[indexPath.item])
         detailController.modalPresentationStyle = .fullScreen
         root?.present(detailController, animated: false, completion: nil)
-    }
-    
-    func filterByType(filterType: FilterType) {
-        switch (filterType) {
-            case .Item: do {
-                searchedItems = searchedItemsNoFiltered.filter({ $0 is Item })
-            }
-            case .Monster: do {
-                searchedItems = searchedItemsNoFiltered.filter({ $0 is Monster })
-            }
-            case .Fix: do {
-                searchedItems = searchedItemsNoFiltered.filter({ $0 is Fix })
-            }
-            default: searchedItems = searchedItemsNoFiltered
-        }
-        collectionView.reloadData()
-    }
-    
-    func reloadItemsControllerData(_ newItems: [PediaElement]) {
-        searchedItems = newItems
-        searchedItemsNoFiltered = newItems
-        collectionView.reloadData()
-    }
-    
-    func searchItems(query: String) {
-        chromerivalsService.getSearchedItems(query: query) { items in
-            self.reloadItemsControllerData(items)
-        }
+         */
     }
 
 }
+
+final class PediaDataSource: UICollectionViewDiffableDataSource<PediaElement, PediaElement> {}

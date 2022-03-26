@@ -12,21 +12,17 @@ struct SearchResponse: Codable {
 }
 
 struct SearchResponseResult: Codable {
-    var fixes: Array<Fix>? = nil
-    var items: Array<Item>? = nil
-    var monsters: Array<Monster>? = nil
+    var fixes: Array<PediaElement>? = nil
+    var items: Array<PediaElement>? = nil
+    var monsters: Array<PediaElement>? = nil
 }
 
+/*
 struct PediaResponse: Codable {
     var result: [String: String]? = nil
 }
+ */
 
-struct ItemResponse: Codable {
-    var result: Item? = nil
-}
-struct MonsterResponse: Codable {
-    var result: Monster? = nil
-}
-struct FixResponse: Codable {
-    var result: Fix? = nil
+struct PediaResponse: Codable {
+    var result: PediaElement? = nil
 }

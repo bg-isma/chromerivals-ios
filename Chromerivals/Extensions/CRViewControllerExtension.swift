@@ -10,40 +10,41 @@ import UIKit
 
 extension CRViewController {
     
-    func setUpCell(with cell: CRTableViewCell, at index: Int) -> CRTableViewCell {
-        let component = cRViewComponents[index]
-        cell.addSubview(component.componentView)
+    func setUpCell(at index: IndexPath, in tableView: UITableView, andID reuseIdentifier: String) -> CRTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: index) as! CRTableViewCell
+        cell.frame.size.height = self.setUpCellHeight(at: index.section, in: tableView)
+        cell.addSubview(cRViewComponents[index.section].componentView)
         return cell
     }
     
-    func setUpCellHeight(at index: Int) -> CGFloat {
+    func setUpCellHeight(at index: Int, in tableView: UITableView) -> CGFloat {
         let lastIndex = index == cRViewComponents.count - 1 ? true : false
         let component = cRViewComponents[index]
         let height = component.height
         if (lastIndex) {
-            let lastCellHeight = getLastCellHeight()
+            let lastCellHeight = getLastCellHeight(in: tableView)
             if ((lastCellHeight - component.height) >= 0) {
-                setUpTableScroll(isEnabled: false)
+                setUpTableScroll(isEnabled: false, in: tableView)
                 component.componentView.frame.size.height = lastCellHeight
                 return lastCellHeight
             }
-            setUpTableScroll(isEnabled: true)
+            setUpTableScroll(isEnabled: true, in: tableView)
             return height
         }
         return height
     }
     
-    func getLastCellHeight() -> CGFloat {
+    func getLastCellHeight(in tableView: UITableView) -> CGFloat {
         var cellsHeight = 0.0
         for index in 0...(cRViewComponents.count - 2) {
-            cellsHeight += setUpCellHeight(at: index)
+            cellsHeight += setUpCellHeight(at: index, in: tableView)
         }
-        let tableHeight = self.tableView?.frame.height ?? 0
+        let tableHeight = tableView.frame.height
         return tableHeight - cellsHeight
     }
     
-    func setUpTableScroll(isEnabled: Bool) {
-        self.tableView?.isScrollEnabled = isEnabled
+    func setUpTableScroll(isEnabled: Bool, in tableView: UITableView) {
+        tableView.isScrollEnabled = isEnabled
     }
     
 }

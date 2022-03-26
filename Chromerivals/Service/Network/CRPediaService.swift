@@ -40,13 +40,13 @@ class CRPediaService: CRNetwork {
            switch response.result {
                case .success(_): do {
                    if let responseResult = response.data {
-                       let result = try! JSONDecoder().decode(ItemResponse.self, from: responseResult)
-                       completionHandler(result.result ?? Item())
+                       let result = try! JSONDecoder().decode(PediaResponse.self, from: responseResult)
+                       completionHandler(result.result ?? PediaElement())
                    }
                }
                case let .failure(error): do {
                    print("ERROR: \(error)")
-                   completionHandler(Item())
+                   completionHandler(PediaElement())
                }
            }
         }
@@ -58,13 +58,13 @@ class CRPediaService: CRNetwork {
            switch response.result {
                case .success(_): do {
                    if let responseResult = response.data {
-                       let result = try! JSONDecoder().decode(MonsterResponse.self, from: responseResult)
-                       completionHandler(result.result ?? Monster())
+                       let result = try! JSONDecoder().decode(PediaResponse.self, from: responseResult)
+                       completionHandler(result.result ?? PediaElement())
                    }
                }
                case let .failure(error): do {
                    print("ERROR: \(error)")
-                   completionHandler(Item())
+                   completionHandler(PediaElement())
                }
            }
         }
@@ -76,13 +76,13 @@ class CRPediaService: CRNetwork {
            switch response.result {
                case .success(_): do {
                    if let responseResult = response.data {
-                       let result = try! JSONDecoder().decode(FixResponse.self, from: responseResult)
-                       completionHandler(result.result ?? Fix())
+                       let result = try! JSONDecoder().decode(PediaResponse.self, from: responseResult)
+                       completionHandler(result.result ?? PediaElement())
                    }
                }
                case let .failure(error): do {
                    print("ERROR: \(error)")
-                   completionHandler(Item())
+                   completionHandler(PediaElement())
                }
            }
         }

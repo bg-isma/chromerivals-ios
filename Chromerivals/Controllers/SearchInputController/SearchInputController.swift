@@ -49,7 +49,7 @@ class SearchInputController: UIViewController, UITextFieldDelegate, CRViewCompon
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.collectionViewController?.searchItems(query: textField.text ?? "")
+        self.collectionViewController?.pediaRepository.searchItems(query: textField.text ?? "")
         self.view.endEditing(true)
         return true
      }

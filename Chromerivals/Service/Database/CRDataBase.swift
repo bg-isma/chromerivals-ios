@@ -26,7 +26,9 @@ class CRDataBase {
     func getAllEvents() -> [Event] {
         var events: [Event] = []
         for event in localRealm.objects(UpcomingEventDB.self).enumerated() {
-            events.append(event.element)
+            let data = (try? NSKeyedArchiver.archivedData(withRootObject: event, requiringSecureCoding: false)) ?? Data()
+            let result = try! JSONDecoder().decode(Event.self, from: data)
+            events.append(result)
         }
         return events
     }

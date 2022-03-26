@@ -75,11 +75,11 @@ class FilterChipsController:
             switch (collectionController) {
                 case is EventCollectionController: do {
                     let component = (collectionController as! EventCollectionController)
-                    component.filterByType(filterType: filter)
+                    component.eventRepository.changeFilter(with: filter)
                 }
                 case is SearchCollectionController: do {
                     let component = (collectionController as! SearchCollectionController)
-                    component.filterByType(filterType: filter)
+                    component.pediaRepository.changeFilter(with: filter)
                 }
                 default: print("no controller")
             }

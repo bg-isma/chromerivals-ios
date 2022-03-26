@@ -19,9 +19,10 @@ class SearchCollectionViewCell: UICollectionViewCell {
         setUpCell()
     }
     
-    func setUpCellContent(pediaElement: inout PediaElement) {
-        pediaItemName.text = pediaElement.name?.deleteStrangeCharacters() ?? ""
-        CRPediaService().getElementImage(iconId: String(Int(pediaElement.iconId ?? 0)), { response in
+    func setUpCellContent(pediaElement: PediaElement) {
+        var element = pediaElement
+        pediaItemName.text = element.name?.deleteStrangeCharacters() ?? ""
+        CRPediaService().getElementImage(iconId: String(Int(element.iconId ?? 0)), { response in
             self.pediaItemImage.image = response
         })
     }

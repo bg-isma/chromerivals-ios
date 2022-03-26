@@ -16,7 +16,7 @@ class PediaItemDetailViewController: UIViewController {
     @IBOutlet weak var headerContent: UIView!
     
     lazy var cRPediaService: CRPediaService = CRPediaService()
-    lazy var element: PediaElement = Item()
+    var element: PediaElement = PediaElement()
     
     init(_ element: PediaElement) {
         super.init(nibName: "PediaItemDetailView", bundle: nil)
@@ -38,11 +38,11 @@ class PediaItemDetailViewController: UIViewController {
     }
     
     func getPediaElement() {
-        switch (self.element) {
-            case is Monster: do {
-                let monster = self.element as! Monster
+        switch (self.element.type) {
+            case .Monster: do {
+                let monster = self.element
                 cRPediaService.getMonsterById(id: monster.monsterCode?.idString ?? "") { element in
-                    var monster = element as! Monster
+                    var monster = element
                     self.itemName.text = monster.name?.deleteStrangeCharacters()
                     self.itemDescription.text = "NO DESCRIPTION"
                     self.cRPediaService.getElementImage(iconId: String(Int(monster.iconId ?? 0))) { response in
@@ -50,10 +50,10 @@ class PediaItemDetailViewController: UIViewController {
                     }
                 }
             }
-            case is Item: do {
-                let item = self.element as! Item
+            case .Item: do {
+                let item = self.element
                 cRPediaService.getItemById(id: item.itemCode?.idString ?? "") { element in
-                    var item = element as! Item
+                    var item = element
                     self.itemName.text = item.name?.deleteStrangeCharacters()
                     self.itemDescription.numberOfLines = item.itemInfo?.count ?? 1
                     var description = item.itemInfo?.reduce("") { result, info in
@@ -66,10 +66,10 @@ class PediaItemDetailViewController: UIViewController {
                     }
                 }
             }
-            case is Fix: do {
-                let fix = self.element as! Fix
+            case .Fixe: do {
+                let fix = self.element
                 cRPediaService.getFixById(id: fix.itemCode?.idString ?? "") { element in
-                    var fix = element as! Fix
+                    var fix = element
                     self.itemName.text = fix.name?.deleteStrangeCharacters()
                     self.itemDescription.text = fix.itemInfo?.joined(separator: "\n")
                     self.cRPediaService.getElementImage(iconId: String(Int(fix.iconId ?? 0))) { response in
@@ -77,7 +77,6 @@ class PediaItemDetailViewController: UIViewController {
                     }
                 }
             }
-            default: print("")
         }
     }
     

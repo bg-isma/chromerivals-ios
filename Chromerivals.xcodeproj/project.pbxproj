@@ -15,8 +15,6 @@
 		82438DEB27D91394001F8E04 /* ChromerivalsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82438DEA27D91394001F8E04 /* ChromerivalsUITests.swift */; };
 		82438DED27D91394001F8E04 /* ChromerivalsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82438DEC27D91394001F8E04 /* ChromerivalsUITestsLaunchTests.swift */; };
 		82438DFE27D92743001F8E04 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82438DFC27D92743001F8E04 /* MainNavigationController.swift */; };
-		82438E4B27D977F6001F8E04 /* UpcomingEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82438E4A27D977F6001F8E04 /* UpcomingEvent.swift */; };
-		82438E4D27D9780D001F8E04 /* CurrentEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82438E4C27D9780D001F8E04 /* CurrentEvent.swift */; };
 		82438E5027D9789F001F8E04 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82438E4F27D9789F001F8E04 /* Event.swift */; };
 		82438E5327D97AA8001F8E04 /* EventResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82438E5227D97AA8001F8E04 /* EventResponses.swift */; };
 		82438E5527D97ACC001F8E04 /* PediaResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82438E5427D97ACC001F8E04 /* PediaResponses.swift */; };
@@ -38,6 +36,8 @@
 		82438ED927DD120F001F8E04 /* EventCollectionControllerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82438ED827DD120F001F8E04 /* EventCollectionControllerView.xib */; };
 		82438EDC27DD1286001F8E04 /* EventCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82438EDB27DD1286001F8E04 /* EventCollectionController.swift */; };
 		82438EE027DE8DB3001F8E04 /* SearchCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82438EDF27DE8DB2001F8E04 /* SearchCollectionController.swift */; };
+		8263F28927ECF982001DABB9 /* PediaRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8263F28827ECF982001DABB9 /* PediaRepository.swift */; };
+		8263F28B27ECF9A3001DABB9 /* EventRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8263F28A27ECF9A3001DABB9 /* EventRepository.swift */; };
 		826F8F9F27DF96E3008FE7E2 /* SearchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 826F8F9E27DF96E3008FE7E2 /* SearchCollectionViewCell.xib */; };
 		826F8FA227DF982C008FE7E2 /* SearchCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 826F8FA127DF982C008FE7E2 /* SearchCollectionView.xib */; };
 		826F8FA427DF9955008FE7E2 /* CRPediaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826F8FA327DF9955008FE7E2 /* CRPediaService.swift */; };
@@ -51,12 +51,9 @@
 		82C9812F27E324BB004E889B /* CRDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9812E27E324BB004E889B /* CRDataBase.swift */; };
 		82C9813127E32525004E889B /* UpcomingEventDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9813027E32525004E889B /* UpcomingEventDB.swift */; };
 		82C9813427E32812004E889B /* CREventsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9813327E32812004E889B /* CREventsService.swift */; };
-		82C9813627E328AD004E889B /* Monster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9813527E328AD004E889B /* Monster.swift */; };
-		82C9813827E32914004E889B /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9813727E32914004E889B /* Item.swift */; };
 		82C9813A27E32933004E889B /* NetworkRsponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9813927E32933004E889B /* NetworkRsponse.swift */; };
 		82C9813C27E3297A004E889B /* CRNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9813B27E3297A004E889B /* CRNetwork.swift */; };
 		82C9813F27E329D8004E889B /* NetworkData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9813E27E329D8004E889B /* NetworkData.swift */; };
-		82C9814127E32AE4004E889B /* Fixe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9814027E32AE4004E889B /* Fixe.swift */; };
 		82C9814327E32B40004E889B /* ExpandableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9814227E32B40004E889B /* ExpandableItem.swift */; };
 		82C9814527E32C5A004E889B /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C9814427E32C5A004E889B /* UITextFieldExtension.swift */; };
 		82C9814A27E40FBE004E889B /* CRTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82C9814927E40FBE004E889B /* CRTableViewCell.xib */; };
@@ -106,8 +103,6 @@
 		82438DEA27D91394001F8E04 /* ChromerivalsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChromerivalsUITests.swift; sourceTree = "<group>"; };
 		82438DEC27D91394001F8E04 /* ChromerivalsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChromerivalsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		82438DFC27D92743001F8E04 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
-		82438E4A27D977F6001F8E04 /* UpcomingEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingEvent.swift; sourceTree = "<group>"; };
-		82438E4C27D9780D001F8E04 /* CurrentEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentEvent.swift; sourceTree = "<group>"; };
 		82438E4F27D9789F001F8E04 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		82438E5227D97AA8001F8E04 /* EventResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventResponses.swift; sourceTree = "<group>"; };
 		82438E5427D97ACC001F8E04 /* PediaResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PediaResponses.swift; sourceTree = "<group>"; };
@@ -129,6 +124,8 @@
 		82438ED827DD120F001F8E04 /* EventCollectionControllerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventCollectionControllerView.xib; sourceTree = "<group>"; };
 		82438EDB27DD1286001F8E04 /* EventCollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionController.swift; sourceTree = "<group>"; };
 		82438EDF27DE8DB2001F8E04 /* SearchCollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionController.swift; sourceTree = "<group>"; };
+		8263F28827ECF982001DABB9 /* PediaRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PediaRepository.swift; sourceTree = "<group>"; };
+		8263F28A27ECF9A3001DABB9 /* EventRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRepository.swift; sourceTree = "<group>"; };
 		826F8F9E27DF96E3008FE7E2 /* SearchCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCollectionViewCell.xib; sourceTree = "<group>"; };
 		826F8FA127DF982C008FE7E2 /* SearchCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCollectionView.xib; sourceTree = "<group>"; };
 		826F8FA327DF9955008FE7E2 /* CRPediaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRPediaService.swift; sourceTree = "<group>"; };
@@ -142,12 +139,9 @@
 		82C9812E27E324BB004E889B /* CRDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRDataBase.swift; sourceTree = "<group>"; };
 		82C9813027E32525004E889B /* UpcomingEventDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingEventDB.swift; sourceTree = "<group>"; };
 		82C9813327E32812004E889B /* CREventsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CREventsService.swift; sourceTree = "<group>"; };
-		82C9813527E328AD004E889B /* Monster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monster.swift; sourceTree = "<group>"; };
-		82C9813727E32914004E889B /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		82C9813927E32933004E889B /* NetworkRsponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRsponse.swift; sourceTree = "<group>"; };
 		82C9813B27E3297A004E889B /* CRNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRNetwork.swift; sourceTree = "<group>"; };
 		82C9813E27E329D8004E889B /* NetworkData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkData.swift; sourceTree = "<group>"; };
-		82C9814027E32AE4004E889B /* Fixe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixe.swift; sourceTree = "<group>"; };
 		82C9814227E32B40004E889B /* ExpandableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableItem.swift; sourceTree = "<group>"; };
 		82C9814427E32C5A004E889B /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		82C9814927E40FBE004E889B /* CRTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CRTableViewCell.xib; sourceTree = "<group>"; };
@@ -316,6 +310,7 @@
 		82438E4027D97610001F8E04 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				8263F28727ECF95C001DABB9 /* repositories */,
 				82438E4227D97624001F8E04 /* Network */,
 				82438E4127D9761B001F8E04 /* Database */,
 			);
@@ -373,8 +368,6 @@
 		82438E4E27D97871001F8E04 /* protocols */ = {
 			isa = PBXGroup;
 			children = (
-				826F8FA627DFADD4008FE7E2 /* PediaElement.swift */,
-				82438E4F27D9789F001F8E04 /* Event.swift */,
 				82C9813927E32933004E889B /* NetworkRsponse.swift */,
 				82C9813B27E3297A004E889B /* CRNetwork.swift */,
 				82C9814227E32B40004E889B /* ExpandableItem.swift */,
@@ -528,6 +521,15 @@
 			path = SearchCollectionController;
 			sourceTree = "<group>";
 		};
+		8263F28727ECF95C001DABB9 /* repositories */ = {
+			isa = PBXGroup;
+			children = (
+				8263F28827ECF982001DABB9 /* PediaRepository.swift */,
+				8263F28A27ECF9A3001DABB9 /* EventRepository.swift */,
+			);
+			path = repositories;
+			sourceTree = "<group>";
+		};
 		826F8F9D27DF9689008FE7E2 /* SearchCollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -548,9 +550,7 @@
 		826F8FA527DFADBE008FE7E2 /* pedia */ = {
 			isa = PBXGroup;
 			children = (
-				82C9813527E328AD004E889B /* Monster.swift */,
-				82C9813727E32914004E889B /* Item.swift */,
-				82C9814027E32AE4004E889B /* Fixe.swift */,
+				826F8FA627DFADD4008FE7E2 /* PediaElement.swift */,
 			);
 			path = pedia;
 			sourceTree = "<group>";
@@ -582,8 +582,7 @@
 		82C9813227E327CA004E889B /* events */ = {
 			isa = PBXGroup;
 			children = (
-				82438E4A27D977F6001F8E04 /* UpcomingEvent.swift */,
-				82438E4C27D9780D001F8E04 /* CurrentEvent.swift */,
+				82438E4F27D9789F001F8E04 /* Event.swift */,
 			);
 			path = events;
 			sourceTree = "<group>";
@@ -845,13 +844,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82438E4D27D9780D001F8E04 /* CurrentEvent.swift in Sources */,
 				82FD83A527E89F7600D261D5 /* FilterChipCell.swift in Sources */,
 				82FD83A227E89C4200D261D5 /* CRViewControllerExtension.swift in Sources */,
-				82C9813627E328AD004E889B /* Monster.swift in Sources */,
+				8263F28B27ECF9A3001DABB9 /* EventRepository.swift in Sources */,
 				82438E6327D9A08E001F8E04 /* SearchController.swift in Sources */,
 				826F8FA427DF9955008FE7E2 /* CRPediaService.swift in Sources */,
-				82C9813827E32914004E889B /* Item.swift in Sources */,
+				8263F28927ECF982001DABB9 /* PediaRepository.swift in Sources */,
 				82FD83AB27E8AE2D00D261D5 /* CRViewComponent.swift in Sources */,
 				82C9814527E32C5A004E889B /* UITextFieldExtension.swift in Sources */,
 				82C9813C27E3297A004E889B /* CRNetwork.swift in Sources */,
@@ -860,7 +858,6 @@
 				82C9812827E3000B004E889B /* UILabelExtension.swift in Sources */,
 				826F8FA727DFADD4008FE7E2 /* PediaElement.swift in Sources */,
 				82FD83AD27E8AE3D00D261D5 /* CRViewController.swift in Sources */,
-				82438E4B27D977F6001F8E04 /* UpcomingEvent.swift in Sources */,
 				82438DCA27D91391001F8E04 /* AppDelegate.swift in Sources */,
 				82FD83B727E9700B00D261D5 /* DateExtension.swift in Sources */,
 				82C9812627E2FA24004E889B /* SearchCollectionControllerExtension.swift in Sources */,
@@ -871,7 +868,6 @@
 				82FD83AF27E95C2200D261D5 /* UIImageViewExtension.swift in Sources */,
 				82438E5B27D99E3A001F8E04 /* HomeController.swift in Sources */,
 				82438E5327D97AA8001F8E04 /* EventResponses.swift in Sources */,
-				82C9814127E32AE4004E889B /* Fixe.swift in Sources */,
 				82C9814D27E4ECAE004E889B /* SearchInputController.swift in Sources */,
 				82438E5027D9789F001F8E04 /* Event.swift in Sources */,
 				82438E8727DA4825001F8E04 /* EventCellController.swift in Sources */,
@@ -987,7 +983,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1042,7 +1038,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
