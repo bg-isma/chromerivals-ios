@@ -2,12 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CR_API_KEY</key>
-	<string>${CR_API_KEY}</string>
 	<key>CFBundleIcons</key>
 	<dict/>
 	<key>CFBundleIcons~ipad</key>
 	<dict/>
+	<key>CR_API_KEY</key>
+	<string>${CR_API_KEY}</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>NunitoSans-SemiBold.ttf</string>

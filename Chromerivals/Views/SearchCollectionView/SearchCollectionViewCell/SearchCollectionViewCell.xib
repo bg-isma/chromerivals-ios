@@ -28,8 +28,8 @@
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </label>
-                    <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="akar-icons_arrow-right" translatesAutoresizingMaskIntoConstraints="NO" id="668-tc-nrj">
-                        <rect key="frame" x="341" y="36" width="25" height="20"/>
+                    <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="akar-icons_arrow-right" translatesAutoresizingMaskIntoConstraints="NO" id="668-tc-nrj">
+                        <rect key="frame" x="343" y="36" width="25" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="WFT-7f-vr8"/>
                             <constraint firstAttribute="height" constant="20" id="x6E-gf-JY5"/>

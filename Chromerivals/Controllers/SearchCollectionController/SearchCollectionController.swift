@@ -64,12 +64,10 @@ class SearchCollectionController:
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        /*
         let detailController =
-        PediaItemDetailViewController(searchedItems[indexPath.item])
+        PediaItemDetailViewController(pediaRepository.searchedItems[indexPath.section])
         detailController.modalPresentationStyle = .fullScreen
         root?.present(detailController, animated: false, completion: nil)
-         */
     }
 
 }

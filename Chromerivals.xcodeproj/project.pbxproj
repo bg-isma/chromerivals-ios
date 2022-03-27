@@ -10,7 +10,6 @@
 		82438DCA27D91391001F8E04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82438DC927D91391001F8E04 /* AppDelegate.swift */; };
 		82438DCC27D91391001F8E04 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82438DCB27D91391001F8E04 /* SceneDelegate.swift */; };
 		82438DD327D91393001F8E04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82438DD227D91393001F8E04 /* Assets.xcassets */; };
-		82438DD627D91393001F8E04 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82438DD427D91393001F8E04 /* LaunchScreen.storyboard */; };
 		82438DE127D91394001F8E04 /* ChromerivalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82438DE027D91394001F8E04 /* ChromerivalsTests.swift */; };
 		82438DEB27D91394001F8E04 /* ChromerivalsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82438DEA27D91394001F8E04 /* ChromerivalsUITests.swift */; };
 		82438DED27D91394001F8E04 /* ChromerivalsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82438DEC27D91394001F8E04 /* ChromerivalsUITestsLaunchTests.swift */; };
@@ -38,6 +37,11 @@
 		82438EE027DE8DB3001F8E04 /* SearchCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82438EDF27DE8DB2001F8E04 /* SearchCollectionController.swift */; };
 		8263F28927ECF982001DABB9 /* PediaRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8263F28827ECF982001DABB9 /* PediaRepository.swift */; };
 		8263F28B27ECF9A3001DABB9 /* EventRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8263F28A27ECF9A3001DABB9 /* EventRepository.swift */; };
+		8263F28D27EFC346001DABB9 /* SearchElementUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8263F28C27EFC346001DABB9 /* SearchElementUITest.swift */; };
+		8263F29027EFCF44001DABB9 /* LaunchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8263F28F27EFCF44001DABB9 /* LaunchController.swift */; };
+		8263F29327EFD0B5001DABB9 /* chrome_splash.json in Resources */ = {isa = PBXBuildFile; fileRef = 8263F29227EFD0B5001DABB9 /* chrome_splash.json */; };
+		8263F29627EFD828001DABB9 /* LaunchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8263F29527EFD828001DABB9 /* LaunchView.xib */; };
+		8263F29827EFDBD1001DABB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8263F29727EFDBD1001DABB9 /* LaunchScreen.storyboard */; };
 		826F8F9F27DF96E3008FE7E2 /* SearchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 826F8F9E27DF96E3008FE7E2 /* SearchCollectionViewCell.xib */; };
 		826F8FA227DF982C008FE7E2 /* SearchCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 826F8FA127DF982C008FE7E2 /* SearchCollectionView.xib */; };
 		826F8FA427DF9955008FE7E2 /* CRPediaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826F8FA327DF9955008FE7E2 /* CRPediaService.swift */; };
@@ -95,7 +99,6 @@
 		82438DC927D91391001F8E04 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82438DCB27D91391001F8E04 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		82438DD227D91393001F8E04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		82438DD527D91393001F8E04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		82438DD727D91393001F8E04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82438DDC27D91394001F8E04 /* ChromerivalsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChromerivalsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		82438DE027D91394001F8E04 /* ChromerivalsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChromerivalsTests.swift; sourceTree = "<group>"; };
@@ -126,6 +129,11 @@
 		82438EDF27DE8DB2001F8E04 /* SearchCollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionController.swift; sourceTree = "<group>"; };
 		8263F28827ECF982001DABB9 /* PediaRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PediaRepository.swift; sourceTree = "<group>"; };
 		8263F28A27ECF9A3001DABB9 /* EventRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRepository.swift; sourceTree = "<group>"; };
+		8263F28C27EFC346001DABB9 /* SearchElementUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchElementUITest.swift; sourceTree = "<group>"; };
+		8263F28F27EFCF44001DABB9 /* LaunchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchController.swift; sourceTree = "<group>"; };
+		8263F29227EFD0B5001DABB9 /* chrome_splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = chrome_splash.json; sourceTree = "<group>"; };
+		8263F29527EFD828001DABB9 /* LaunchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchView.xib; sourceTree = "<group>"; };
+		8263F29727EFDBD1001DABB9 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		826F8F9E27DF96E3008FE7E2 /* SearchCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCollectionViewCell.xib; sourceTree = "<group>"; };
 		826F8FA127DF982C008FE7E2 /* SearchCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCollectionView.xib; sourceTree = "<group>"; };
 		826F8FA327DF9955008FE7E2 /* CRPediaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRPediaService.swift; sourceTree = "<group>"; };
@@ -236,7 +244,6 @@
 				82438DC927D91391001F8E04 /* AppDelegate.swift */,
 				82438DCB27D91391001F8E04 /* SceneDelegate.swift */,
 				82438DD227D91393001F8E04 /* Assets.xcassets */,
-				82438DD427D91393001F8E04 /* LaunchScreen.storyboard */,
 				82438DD727D91393001F8E04 /* Info.plist */,
 			);
 			path = Chromerivals;
@@ -255,6 +262,7 @@
 			children = (
 				82438DEA27D91394001F8E04 /* ChromerivalsUITests.swift */,
 				82438DEC27D91394001F8E04 /* ChromerivalsUITestsLaunchTests.swift */,
+				8263F28C27EFC346001DABB9 /* SearchElementUITest.swift */,
 			);
 			path = ChromerivalsUITests;
 			sourceTree = "<group>";
@@ -262,6 +270,7 @@
 		82438E3C27D97573001F8E04 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8263F28E27EFCF1B001DABB9 /* LaunchController */,
 				82C9814B27E4464B004E889B /* SearchInputController */,
 				826F8FAE27E17103008FE7E2 /* PediaItemDetailController */,
 				82438EDE27DE8D76001F8E04 /* SearchCollectionController */,
@@ -277,6 +286,7 @@
 		82438E3D27D97584001F8E04 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8263F29427EFD11D001DABB9 /* LaunchView */,
 				82C9814E27E4EE6B004E889B /* SearchInputView */,
 				82C9814827E40F90004E889B /* CRTableViewCell */,
 				826F8FB127E17275008FE7E2 /* PediaItemDetailView */,
@@ -437,6 +447,7 @@
 		82438E7627DA35CA001F8E04 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				8263F29127EFCFDF001DABB9 /* Lottie Animations */,
 				82438E7727DA35D6001F8E04 /* Font */,
 			);
 			path = Shared;
@@ -528,6 +539,31 @@
 				8263F28A27ECF9A3001DABB9 /* EventRepository.swift */,
 			);
 			path = repositories;
+			sourceTree = "<group>";
+		};
+		8263F28E27EFCF1B001DABB9 /* LaunchController */ = {
+			isa = PBXGroup;
+			children = (
+				8263F28F27EFCF44001DABB9 /* LaunchController.swift */,
+			);
+			path = LaunchController;
+			sourceTree = "<group>";
+		};
+		8263F29127EFCFDF001DABB9 /* Lottie Animations */ = {
+			isa = PBXGroup;
+			children = (
+				8263F29227EFD0B5001DABB9 /* chrome_splash.json */,
+			);
+			path = "Lottie Animations";
+			sourceTree = "<group>";
+		};
+		8263F29427EFD11D001DABB9 /* LaunchView */ = {
+			isa = PBXGroup;
+			children = (
+				8263F29727EFDBD1001DABB9 /* LaunchScreen.storyboard */,
+				8263F29527EFD828001DABB9 /* LaunchView.xib */,
+			);
+			path = LaunchView;
 			sourceTree = "<group>";
 		};
 		826F8F9D27DF9689008FE7E2 /* SearchCollectionView */ = {
@@ -763,10 +799,11 @@
 			files = (
 				826F8F9F27DF96E3008FE7E2 /* SearchCollectionViewCell.xib in Resources */,
 				82C9815027E4EEA3004E889B /* SearchInputView.xib in Resources */,
+				8263F29327EFD0B5001DABB9 /* chrome_splash.json in Resources */,
 				82438E7C27DA3681001F8E04 /* NunitoSans-ExtraBold.ttf in Resources */,
 				82438ED427DC56F9001F8E04 /* FilterChipControllerView.xib in Resources */,
-				82438DD627D91393001F8E04 /* LaunchScreen.storyboard in Resources */,
 				82438E7B27DA3681001F8E04 /* NunitoSans-Bold.ttf in Resources */,
+				8263F29827EFDBD1001DABB9 /* LaunchScreen.storyboard in Resources */,
 				82438ED927DD120F001F8E04 /* EventCollectionControllerView.xib in Resources */,
 				82438E7027DA0AEE001F8E04 /* HomeHeaderView.xib in Resources */,
 				82438E5E27D9A015001F8E04 /* SearchView.xib in Resources */,
@@ -777,6 +814,7 @@
 				82C9814A27E40FBE004E889B /* CRTableViewCell.xib in Resources */,
 				82438ED627DC59D2001F8E04 /* FilterChipCellView.xib in Resources */,
 				82438E8427DA3FE3001F8E04 /* EventCellView.xib in Resources */,
+				8263F29627EFD828001DABB9 /* LaunchView.xib in Resources */,
 				82438DD327D91393001F8E04 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -884,6 +922,7 @@
 				82C9813A27E32933004E889B /* NetworkRsponse.swift in Sources */,
 				82C9812A27E3001D004E889B /* StringExtension.swift in Sources */,
 				82438E7527DA2918001F8E04 /* UIColorExtension.swift in Sources */,
+				8263F29027EFCF44001DABB9 /* LaunchController.swift in Sources */,
 				82FD83A727E8A04A00D261D5 /* FilterChipsControllerExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -902,6 +941,7 @@
 			files = (
 				82438DEB27D91394001F8E04 /* ChromerivalsUITests.swift in Sources */,
 				82438DED27D91394001F8E04 /* ChromerivalsUITestsLaunchTests.swift in Sources */,
+				8263F28D27EFC346001DABB9 /* SearchElementUITest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -919,17 +959,6 @@
 			targetProxy = 82438DE727D91394001F8E04 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		82438DD427D91393001F8E04 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				82438DD527D91393001F8E04 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		82438DEE27D91394001F8E04 /* Debug */ = {

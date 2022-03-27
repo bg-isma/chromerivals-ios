@@ -91,8 +91,9 @@ class EventViewCell: UICollectionViewCell {
        switch (Int(eventType)) {
            case 27: return "Nation Kill Event"
            case 28: return "Free For All"
-           case 3: return "Outpost"
-           case 4: return "Mothership"
+           case  3: return "Outpost"
+           case  4: return "Mothership"
+           case 32: return "Space Ball"
            default: return "Free For All"
        }
     }
