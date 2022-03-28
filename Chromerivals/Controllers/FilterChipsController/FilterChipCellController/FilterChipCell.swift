@@ -26,12 +26,12 @@ class FilterChipCell: UICollectionViewCell {
     func select() {
         filterChipContent.backgroundColor = .black
         filterChipText.textColor = .white
-        filterChipContent.layer.borderColor = UIColor.black.cgColor
     }
     
     func unSelect() {
         filterChipContent.backgroundColor = .white
         filterChipText.textColor = .black
+        filterChipContent.layer.borderColor = UIColor.black.cgColor
     }
 
 }

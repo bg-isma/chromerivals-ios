@@ -57,14 +57,26 @@ final class SearchController:
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchTableViewContent.dataSource = dataSource
-        dataSource.apply(snapshot)
+        handleTable()
+        setUpTableView()
+    }
+    
+    func setUpTableView() {
         let nameNib = UINib(nibName: searchControllerNibName, bundle: nil)
         searchTableViewContent.register(nameNib, forCellReuseIdentifier: reuseIdentifier)
+        searchTableViewContent.dataSource = dataSource
+        searchTableViewContent.isScrollEnabled = true
+        dataSource.apply(snapshot)
+    }
+    
+    func handleTable() {
+        NotificationCenter.default.addObserver(forName: .updateTable, object: nil, queue: .main) { observer in
+            self.dataSource.apply(self.snapshot)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return setUpCellHeight(at: indexPath.section, in: tableView)
+        return cRViewComponents[indexPath.section].height
     }
     
     

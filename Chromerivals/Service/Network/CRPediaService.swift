@@ -89,11 +89,11 @@ class CRPediaService: CRNetwork {
     }
     
     func getElementImage(iconId: String, _ completionHandler: @escaping CompletionHandlerImage) {
-        AF.request("https://download.chromerivals.net/resources/items_images/big/\(iconId).png").responseImage { response in
+        AF.request("\(Constants.pediaImageURL)\(iconId).png").responseImage { response in
             if case .success(_) = response.result {
                 completionHandler(UIImage(data: response.data!)!)
             } else {
-                AF.request("https://chromerivals.net/assets/images/icons/item_x.png").responseImage { response in
+                AF.request(Constants.imageErrorURL).responseImage { response in
                     if case .success(_) = response.result {
                         completionHandler(UIImage(data: response.data!)!)
                     }

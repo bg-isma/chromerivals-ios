@@ -25,8 +25,10 @@ final class EventCollectionController: UIViewController, UICollectionViewDelegat
     }
     
     var contentSize: CGSize {
-        if (direction == .vertical) { return CGSize(width: 0, height: 300) }
-        else { return CGSize(width: 0, height: 110) }
+        if (direction == .vertical) {
+            let numEvents: Int = eventRepository.events.filter({ $0.type == Event.EventType.UpcomingEvent }).count
+            return CGSize(width: 0, height: 113 * numEvents)
+        } else { return CGSize(width: 0, height: 110) }
     }
 
     var insets: UIEdgeInsets {
@@ -58,34 +60,45 @@ final class EventCollectionController: UIViewController, UICollectionViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.frame.size.height = height
+        handleEvents()
+        setUpEventCollection()
+        setUpCollection()
+    }
+    
+    func handleEvents() {
+        NotificationCenter.default.addObserver(forName: .eventsUpdate, object: nil, queue: .main) { [self] observer in
+            dataSource.apply(eventRepository.getEventSnapshot(withType: type))
+            setUpHeight()
+            NotificationCenter.default.post(name: .updateTable, object: nil)
+        }
+    }
+    
+    func setUpCollection() {
         if let layout = self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = direction
         }
         let eventNib = UINib(nibName: eventCellNibName, bundle: nil)
         collectionView.register(eventNib, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.dataSource = dataSource
-
-        handleEvents()
-        setInsets()
     }
     
-    func handleEvents() {
-        NotificationCenter.default.addObserver(forName: .eventsUpdate, object: nil, queue: .main) { [self] observer in
-            dataSource.apply(eventRepository.getEventSnapshot(withType: type))
-        }
+    func setUpHeight() {
+        self.view.frame.size.height = height
     }
     
-    func setInsets() {
+    func setUpEventCollection() {
         switch (direction) {
             case .vertical: do {
+                collectionView.isScrollEnabled = false
                 self.view.frame =  self.view.frame.inset(by: insets)
             }
             case .horizontal: do {
+                collectionView.isScrollEnabled = true
                 self.view.frame =  self.view.frame.inset(by: insets)
             }
             default: print("no special insets")
         }
+        self.view.frame.size.height = contentSize.height + insets.top + insets.bottom
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

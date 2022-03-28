@@ -60,24 +60,28 @@ final class HomeController: UIViewController, CRViewController, UITableViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.title = "Events"
-        
         setUpTableView()
+        handleTable()
         self.view.backgroundColor = UIColor.CRPrimaryColor()
-        let nameNib = UINib(nibName: homeTableViewCellNibName, bundle: nil)
-        homeViewTableContent.register(nameNib, forCellReuseIdentifier: reuseIdentifier)
+    }
+    
+    func handleTable() {
+        NotificationCenter.default.addObserver(forName: .updateTable, object: nil, queue: .main) { observer in
+            self.dataSource.apply(self.snapshot)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let height = setUpCellHeight(at: indexPath.section, in: tableView)
-        return height
+        return cRViewComponents[indexPath.section].height
     }
     
     func setUpTableView() {
+        let nameNib = UINib(nibName: homeTableViewCellNibName, bundle: nil)
+        homeViewTableContent.register(nameNib, forCellReuseIdentifier: reuseIdentifier)
         homeViewTableContent.dataSource = dataSource
         homeViewTableContent.frame.size.height = self.view.frame.height
-        homeViewTableContent.backgroundColor = .red
+        homeViewTableContent.isScrollEnabled = true
+        homeViewTableContent.backgroundColor = .white
         dataSource.apply(snapshot)
     }
 

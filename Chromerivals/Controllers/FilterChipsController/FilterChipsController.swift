@@ -70,6 +70,16 @@ class FilterChipsController:
         collectionView.reloadData()
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FilterChipCell
+        cell.filterChipText.text = filters[indexPath.item].rawValue
+        return CGSize(width: cell.filterChipText.intrinsicContentSize.width + 30, height: contentSize.height - 2)
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        1
+    }
+    
     func filter(with filter: FilterType) {
         if let collectionController = collectionViewController {
             switch (collectionController) {
@@ -88,3 +98,5 @@ class FilterChipsController:
     }
     
 }
+
+extension FilterChipsController: UICollectionViewDelegateFlowLayout {}

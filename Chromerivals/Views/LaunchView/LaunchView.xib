@@ -4,13 +4,12 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LaunchController" customModule="Chromerivals" customModuleProvider="target">
             <connections>
-                <outlet property="splashAnimationView" destination="FbJ-D6-5bo" id="VQp-K6-z0e"/>
+                <outlet property="splashAnimationView" destination="FbJ-D6-5bo" id="v1N-gh-qFG"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Utr-Sq-ZES"/>
             </connections>
         </placeholder>
@@ -19,9 +18,9 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FbJ-D6-5bo" customClass="LOTAnimationView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FbJ-D6-5bo">
                     <rect key="frame" x="107" y="353" width="200" height="200"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" red="1" green="1" blue="0.99999994039999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="200" id="MrV-dz-9j1"/>
                         <constraint firstAttribute="width" constant="200" id="xnH-e9-OUk"/>
@@ -40,9 +39,4 @@
             <point key="canvasLocation" x="132" y="102"/>
         </view>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

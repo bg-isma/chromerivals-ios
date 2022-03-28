@@ -9,27 +9,41 @@ import Foundation
 import RealmSwift
 
 class CRDataBase {
-    lazy var localRealm = try! Realm()
+    var localRealm: Realm? = {
+        do {
+            return try Realm()
+        } catch { return nil }
+    }()
     
     func deleteAllEvents()  {
-        try! localRealm.write {
-            localRealm.deleteAll()
-        }
+        do {
+            guard let realm = self.localRealm else { return }
+            try realm.write {
+                realm.deleteAll()
+            }
+        } catch {}
     }
     
     func addEvent(event: UpcomingEventDB) {
-        try! localRealm.write {
-            localRealm.add(event)
-        }
+        do {
+            guard let realm = self.localRealm else { return }
+            try realm.write {
+                realm.add(event)
+            }
+        } catch {}
     }
     
     func getAllEvents() -> [Event] {
+        guard let realm = self.localRealm else { return [] }
         var events: [Event] = []
-        for event in localRealm.objects(UpcomingEventDB.self).enumerated() {
-            let data = (try? NSKeyedArchiver.archivedData(withRootObject: event, requiringSecureCoding: false)) ?? Data()
-            let result = try! JSONDecoder().decode(Event.self, from: data)
-            events.append(result)
+        for event in realm.objects(UpcomingEventDB.self).enumerated() {
+            do {
+                let data = try NSKeyedArchiver.archivedData(withRootObject: event, requiringSecureCoding: false)
+                let result = try JSONDecoder().decode(Event.self, from: data)
+                events.append(result)
+            } catch {}
         }
         return events
     }
+    
 }

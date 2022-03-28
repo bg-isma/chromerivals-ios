@@ -35,6 +35,7 @@ extension Array where Element == PediaElement {
 extension Notification.Name {
     static let eventsUpdate = Notification.Name(rawValue: "EVENT_UPDATE")
     static let searchItems = Notification.Name(rawValue: "SEARCH_ITEMS")
+    static let updateTable = Notification.Name(rawValue: "UPDATE_TABLE")
 }
 
 final class EventRepository {
@@ -84,7 +85,7 @@ final class EventRepository {
                 
                 if (upcomingEvents.count == 0) {
                     upcomingEvents = cRDataBase.getAllEvents()
-                } else { self.setEventsOnDataBase(events) }
+                } else { self.setEventsOnDataBase(upcomingEvents) }
                 
                 events = outposts + currentEvents + mothership
                 NotificationCenter.default.post(name: .eventsUpdate, object: nil)
@@ -105,18 +106,16 @@ final class EventRepository {
     }
 
     func setEventsOnDataBase(_ events: [Event]) {
-        DispatchQueue(label: "background").async {
-            self.cRDataBase.deleteAllEvents()
-            for event in events {
-                let upcomingEvent = UpcomingEventDB(
-                    deployTime: event.deployTime,
-                    ani: event.ani,
-                    bcu: event.bcu,
-                    outpostName: event.outpostName,
-                    influence: event.influence
-                )
-                self.cRDataBase.addEvent(event: upcomingEvent)
-            }
+        self.cRDataBase.deleteAllEvents()
+        for event in events {
+            let upcomingEvent = UpcomingEventDB(
+                deployTime: event.deployTime,
+                ani: event.ani,
+                bcu: event.bcu,
+                outpostName: event.outpostName,
+                influence: event.influence
+            )
+            self.cRDataBase.addEvent(event: upcomingEvent)
         }
     }
     

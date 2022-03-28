@@ -11,7 +11,7 @@ import Lottie
 class LaunchController: UIViewController {
 
 
-    @IBOutlet weak var splashAnimationView: LOTAnimationView!
+    @IBOutlet weak var splashAnimationView: UIView!
     
     init() {
         super.init(nibName: "LaunchView", bundle: nil)
@@ -24,17 +24,14 @@ class LaunchController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 1. Set animation content mode
-        splashAnimationView.contentMode = .scaleAspectFit
+        let animationView = AnimationView(name: "chrome_splash")
         
-        // 2. Set animation loop mode
-        splashAnimationView.loopAnimation = true
-        
-        // 3. Adjust animation speed
-        splashAnimationView.animationSpeed = 0.8
-        
-        // 4. Play animation
-        splashAnimationView.play()
+        animationView.frame = splashAnimationView.bounds
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .loop
+        animationView.animationSpeed = 0.8
+        animationView.play()
+        splashAnimationView.addSubview(animationView)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             let mainController = MainNavigationController()
