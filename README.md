@@ -21,7 +21,7 @@ pod install
 - Realm DataBase
 - Lottie Animations
 - Alamofire
-- UI Test
+- UI/Unit Test
 
 
 see too the app for: [Android](https://github.com/bg-isma/chromerivals-android)
